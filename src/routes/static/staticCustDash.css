@@ -111,6 +111,26 @@ th li a {
 	background-color:#f1efef;
 }
 
+#main-flex{
+	margin-top:2px;
+}
+
+#orders-table{
+	margin-left: 0px;
+}
+
+#admin-flex{
+	width:200px;
+}
+
+#caterer-flex{
+	width:336;
+	margin-left:10%;
+}
+#orders-flex{
+	width:450;
+	margin-left:10%;
+}
 /*buttons*/
 .add-btn{
 	background-color:#e6a718;
