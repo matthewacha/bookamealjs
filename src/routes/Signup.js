@@ -4,13 +4,13 @@ import './static/staticHome.css';
 export default () => (
     <div>
     <nav>
-		<div className="navibar">
-			<ul>
-				<li><a className="nav-logo" href="#">Book-A-Meal</a></li>
-				<li id="right-but" ><a className="nav-logo" href="login">Login</a></li>
-			</ul>
-	     </div>
-	</nav>
+			<div className="navibar">
+				<ul>
+					<li><a className="nav-logo" href="Signup">Book-A-Meal</a></li>
+					<li id="right-but" ><a className="nav-logo" href="login">Login</a></li>
+				</ul>
+			</div>
+	  </nav>
 	
 	<div className = "background">
 		<div className="input-forms">
