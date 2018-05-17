@@ -1,5 +1,11 @@
 import React from 'react';
-import Routes from './routes';
+import Index from './routes/index';
+import { BrowserRouter } from 'react-router-dom';
 
 
-export default () => <Routes/>;
+export default () => {
+    return (
+        <BrowserRouter>
+                <Index/>
+        </BrowserRouter>)
+};
