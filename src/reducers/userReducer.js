@@ -1,8 +1,10 @@
-import { SIGN_USER, LOGIN_USER } from '../actions/types';
+import { SIGN_USER, LOGIN_USER, ADMIN_LOGIN, ADMIN_SIGNUP } from '../actions/types';
 
 const initialState = {
     signMessage:{},
-    loggedData:{}
+    loggedData:{},
+    adminSign:{},
+    adminData:{}
 }
 
 export default (state = initialState, action)=>{
@@ -13,6 +15,13 @@ export default (state = initialState, action)=>{
         case LOGIN_USER:
             return {...state,
             loggedData: action.token}
+        case ADMIN_SIGNUP:
+            return {...state,
+            adminSign: action.message}
+        case ADMIN_LOGIN:
+            return {...state,
+                adminData: action.token
+            }
         default:
             return state;
     }
