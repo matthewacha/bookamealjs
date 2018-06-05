@@ -1,5 +1,4 @@
 import { SIGN_USER, LOGIN_USER } from './types';
-import { push } from 'react-router-redux';
 import history from '../components/history';
 
 export const signUp=(signData)=>dispatch => {
