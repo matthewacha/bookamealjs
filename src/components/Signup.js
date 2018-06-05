@@ -1,15 +1,13 @@
 import React from 'react';
 import './static/staticHome.css';
 import { connect } from 'react-redux';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { signUp, redirectLogin } from '../actions/credActions';
 import PropTypes from 'prop-types';
-import history from './history'
 
 class Signup extends React.Component{
 	componentWillReceiveProps(singupMessage){
 		if(singupMessage && singupMessage.user.message==="Successfully signed up"){
-			console.log(singupMessage.user.message);
 			this.props.history.push("/login");
 		}
 	};
@@ -44,7 +42,7 @@ class Signup extends React.Component{
 				<nav>
 						<div className="navibar">
 							<ul>
-								<li><a className="nav-logo" href="Signup">Book-A-Meal</a></li>
+								<li><a className="nav-log" href="Signup">Book-A-Meal</a></li>
 								<li id="right-but" ><a className="nav-logo" href="Login">Login</a></li>
 							</ul>
 						</div>
@@ -53,15 +51,15 @@ class Signup extends React.Component{
 				<div className = "background">
 					<div className="input-forms">
 						<div className="h2">
-							<h2>Sign Up</h2>
+							<h2 id="title">Sign Up</h2>
 						</div>
 						<form onSubmit = {this.onSubmit}>
-							<div className="form-inputs">
+							<div className="forms-inputs">
 								<div>
 								<label className="label">Email</label><br/>
-								<input type="email" name = "email" className="form-control" placeholder="you@email.com" required/><br/><br/>
+								<input type="email" name = "email" className="form-controls" placeholder="you@email.com" required/><br/><br/>
 								<label className="label">Password</label><br/>
-								<input type="password" name = "password" className="form-control" placeholder="*********" required/><br/>
+								<input type="password" name = "password" className="form-controls" placeholder="*********" required/><br/>
 								</div><br/>
 								<div>
 								<button className='submit-button' type="submit">Submit</button>

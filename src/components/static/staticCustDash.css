@@ -55,6 +55,21 @@ th li a {
     text-decoration: none;
 }
 
+#welcome-user{
+	width:30%;
+}
+
+#nav-logo{
+	width:10%;
+}
+#right-but{
+	align-content: right;
+}
+
+.navbar-inverse {
+    background-color: #734fca;
+    border-color: #734fca;
+}
 /*menu*/
 .menu-table{
 	margin:80px 350px 400px 350px;
@@ -105,6 +120,27 @@ th li a {
 	height:auto;
 	flex-direction:column;
 }
+
+/*admin flex*/
+#flex-admin-meals{
+	width:449px;
+}
+
+#flex-admin-orders{
+	width:451px;
+}
+
+#flex-admin-menu{
+	width:449px;
+}
+
+.flex-admin-container{
+	margin-top:2px
+}
+
+.flex-container.menu-admin{
+	background-color: #6b97e800;
+}
 /*profile*/
 .profile-pic{
 	height:200px;
@@ -131,9 +167,37 @@ th li a {
 	width:450;
 	margin-left:10%;
 }
+#navbar-flex{
+	display:flex;
+}
+
+#orders-panel{
+	background-color: #f5a25b;
+	height: 56px;
+}
+
+#meals-panel{
+	background-color: #6b97e8;
+	height: 56px;
+}
+
+#menus-panel{
+	background-color: #6b97e8;
+}
+#menus-dropdown{
+	margin-left: 0px;
+}
 /*buttons*/
 .add-btn{
 	background-color:#e6a718;
+	border:0px;
+	margin-left:0px;
+	color:#ffffff;
+	float:right;
+}
+
+.edi-btn{
+	background-color: #75a2d0;
 	border:0px;
 	margin-left:0px;
 	color:#ffffff;
@@ -157,4 +221,32 @@ th li a {
 
 .form-control{
 	border-radius:3px;
+}
+
+#admin-price{
+	margin-left:10px;
+}
+#add-meal{
+	margin-top:5px;
+}
+
+#add-menu{
+	margin-left:5px;
+}
+
+.panel-body.panel-meals{
+	height:300px;
+	overflow:auto;
+}
+
+#input-meal{
+	width:140px;
+}
+
+#input-menu{
+	width:180px;
+}
+
+#menu-name{
+	padding-left: 40px;
 }

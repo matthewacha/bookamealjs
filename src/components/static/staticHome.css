@@ -13,7 +13,7 @@ body{
 }
 
 
-.h2{
+#title{
 	text-align:center;
 	padding:2px;
 	color:#ffffff;
@@ -30,11 +30,11 @@ body{
 	float:center;
 }
 
-.form-inputs{
+.forms-inputs{
 	margin:0px 0px 0px 25px;
 }
 
-.form-control{
+.form-controls{
 	border-radius:3px;
 }
 
@@ -82,4 +82,35 @@ li a:hover {
 
 #right-but{
 	float:right;
+}
+
+/*adminSignup*/
+#admin-sign{
+	margin-left:33%;
+	width:33%;
+	margin-top:100px;
+}
+
+.flex-container#admin-sign-req{
+	display:flex;
+	flex-direction:column;
+}
+
+#admin-log-req{
+	padding:15px 15px 15px 15px;
+	text-align: center;
+}
+
+.flex-container#admin-buttons{
+	display:flex;
+	padding:15px 15px 15px 15px;
+}
+#ok-button-admin{
+	width:50%;
+	text-align: center;
+}
+
+#cancel-button-admin{
+	width:50%;
+	text-align: center;
 }
