@@ -4,14 +4,17 @@ import { connect } from 'react-redux';
 import { GetMenu, GetMenus } from '../../actions/adminActions';
 class MenuListView extends Component{
     onClickMenu=(e)=>{
+        // return name of currently displayed menu
         e.preventDefault();
+        localStorage.setItem('CurrentMenu', this.props.menu)
         this.props.GetMenu(this.props.menu);
-
-    }
+        }
 
     componentWillMount=()=>{
-        this.props.GetMenus(this.props.menu);
+        this.props.GetMenus();
     }
+
+
     render(){
         let menu = this.props.menu;
         return (
@@ -25,11 +28,10 @@ class MenuListView extends Component{
 MenuListView.propTypes = {
     menu:PropTypes.string.isRequired,
     GetMenu:PropTypes.func.isRequired,
+    ChangeMenuActive:PropTypes.func,
     GetMenus:PropTypes.func.isRequired
 };
 
 const mapStateToProps = state =>({
-    GetMenu:PropTypes.func.isRequired,
-    GetMenus:PropTypes.func.isRequired
 })
 export default connect(mapStateToProps, { GetMenu, GetMenus })(MenuListView);

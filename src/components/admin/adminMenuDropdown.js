@@ -17,12 +17,15 @@ class AdminDropdown extends Component{
     
     componentWillMount=()=>{
         this.props.GetMenus();
-    };    
+    };
+
+    CurrentMenu=(menuStuff)=>{
+        console.log(menuStuff);
+        return localStorage.getItem('CurrentMenu')
+    }
    
     render(){
         const menus=this.props.MenusList;
-        const CurrentMenu = this.props.menulist.Menu[0].name;
-        console.log(CurrentMenu);
         let MenuListViews = menus.Menus.map((menu,index) => <MenuListView menu={menu} key={index} />);  
         return (
             <div>
@@ -32,11 +35,10 @@ class AdminDropdown extends Component{
                                 <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Menu
                                 <span className="caret"></span></button>
                                 <ul className="dropdown-menu">
-                                    {MenuListViews}
-                                    <li><button>Add menu</button></li>
+                                    { MenuListViews } 
                                 </ul>
                             </div>
-                            <div id="menu-name"><h5>{CurrentMenu}</h5></div>
+                            <div id="menu-name"><h5> {this.CurrentMenu(this.props.menulist)}</h5></div>
                             
                         </div>
                     </div> 
@@ -50,14 +52,16 @@ AdminDropdown.propTypes = {
     MenusList: PropTypes.object.isRequired,
     GetMenus:PropTypes.func.isRequired,
     GetMenu:PropTypes.func.isRequired,
-    menulist:PropTypes.object.isRequired
+    menulist:PropTypes.object.isRequired,
+    newMenuName:PropTypes.object.isRequired
 }
 
 const mapStateToProps = state =>({
     MenusList:state.admin.menusList,
     GetMenus:PropTypes.func.isRequired,
     GetMenu:PropTypes.func.isRequired,
-    menulist:state.admin.menuList
+    menulist:state.admin.menuList,
+    newMenuName:state.admin.newPendingMenu
 });
 
 
