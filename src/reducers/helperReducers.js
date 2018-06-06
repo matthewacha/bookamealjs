@@ -10,7 +10,6 @@ const initialState = {
 export default (state=initialState, action)=>{
     switch(action.type){
         case EDIT_STATE:
-        console.log("started edit..");
             return {...state, editState: action.state}
         default:
             return state;

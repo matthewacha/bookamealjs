@@ -14,9 +14,12 @@ export const GET_MEAL = 'GET_MEAL';
 export const EDIT_MEAL = 'EDIT_MEAL';
 export const DELETE_MEAL = 'DELETE_MEAL';
 export const ADD_TO_MENU = 'ADD_TO_MENU';
+export const ADD_NEW_MENU = 'ADD_NEW_MENU';
 export const GET_MENU = 'GET_MENU';
 export const GET_MENUS = 'GET_MENUS';
+export const SET_ACTIVE = 'SET_ACTIVE';
 
+export const GET_ACTIVE_MENU = 'GET_ACTIVE_MENU';
 export const DELETE_MENU_MEAL = 'DELETE_MENU_MEAL';
 
 // helper types
