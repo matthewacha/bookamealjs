@@ -23,7 +23,6 @@ export const signUp=(signData)=>dispatch => {
 }
 
 export const logIn=(loginData)=>dispatch => {
-    console.log(loginData)
     if (loginData){
         const options = {
             method:'POST',
