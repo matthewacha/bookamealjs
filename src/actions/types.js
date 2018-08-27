@@ -21,6 +21,13 @@ export const SET_ACTIVE = 'SET_ACTIVE';
 
 export const GET_ACTIVE_MENU = 'GET_ACTIVE_MENU';
 export const DELETE_MENU_MEAL = 'DELETE_MENU_MEAL';
+export const GET_CATERER = 'GET_CATERER';
+export const GET_CATERER_MENU = 'GET_CATERER_MENU';
+export const MAKE_ORDER = 'MAKE_ORDER';
+export const GET_ORDERS = 'GET_ORDERS';
+export const USER_EDIT_ORDERS = 'USER_EDIT_ORDERS';
+export const DELETE_FROM_CART = 'DELETE_FROM_CART';
+export const ADD_TO_CART = 'ADD_TO_CART';
 
 // helper types
 export const EDIT_STATE = 'EDIT_STATE';
