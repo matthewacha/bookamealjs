@@ -1,8 +1,8 @@
 import React from 'react';
-import './static/staticHome.css';
+import '../static/staticHome.css';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { signUp } from '../actions/credActions';
+import { signUp } from '../../actions/credActions';
 import PropTypes from 'prop-types';
 
 class Signup extends React.Component{
@@ -27,7 +27,7 @@ class Signup extends React.Component{
 				<nav>
 						<div className="navibar">
 							<ul>
-								<li><a className="nav-log" href="Signup">Book-A-Meal</a></li>
+								<li><a className="nav-log" href="Signup" style={{"padding-top":"0px"}}>Book-A-Meal</a></li>
 								<li id="right-but" ><a className="nav-logo" href="Login">Login</a></li>
 							</ul>
 						</div>
