@@ -1,5 +1,5 @@
 import { SIGN_USER, LOGIN_USER, ADMIN_SIGNUP, ADMIN_LOGIN } from './types';
-import history from '../components/history';
+import history from '../utils/history';
 
 export const signUp=(signData)=>dispatch => {
     if (signData){
@@ -9,7 +9,7 @@ export const signUp=(signData)=>dispatch => {
             body:signData, 
             headers:{
                 'Content-Type':'application/json'}};
-       fetch(`/api/v2/auth/signup`,options)
+       fetch(`http://127.0.0.1:5000/api/v2/auth/signup`,options)
        .then (result => result.json())
        .then (data=> dispatch(
         {
