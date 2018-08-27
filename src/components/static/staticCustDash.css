@@ -112,7 +112,6 @@ th li a {
 	height: 100%;
 	flex-direction:row;
 	align-content:space-between;
-	background-color: rgba(255, 255, 255, 0.7);
 }
 
 .flex-container .inner{
@@ -212,6 +211,13 @@ th li a {
 	float:right;
 }
 
+.success-btn{
+	background-color:#5ac02f;
+	border:0px;
+	margin-left:0px;
+	color:#ffffff;
+	float:right;
+}
 
 /*search forms*/
 
@@ -249,4 +255,8 @@ th li a {
 
 #menu-name{
 	padding-left: 40px;
+}
+/* footer */
+footer.bg-darkest-gray{
+	background-color:"black";
 }

@@ -4,15 +4,15 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import PropTypes from 'prop-types';
-import bookMeal from './store';
-import history from './components/history';
+import bookMeal from './utils/store';
+import history from './utils/history';
 
 export default class App extends React.Component {
     render () {
+            const superHistory = "pushState" in window.history
         return (
         <Provider store = {bookMeal} history = {history}>
-                <BrowserRouter>
-                       
+                <BrowserRouter forceRefresh={superHistory}>       
                         <Index/>
                 </BrowserRouter>
         </Provider>)
