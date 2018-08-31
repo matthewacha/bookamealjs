@@ -17,7 +17,7 @@ export default (state = initialState, action)=>{
             loggedData: action.token}
         case ADMIN_SIGNUP:
             return {...state,
-            adminSign: action.message}
+            adminSign: action.payload}
         case ADMIN_LOGIN:
             return {...state,
                 adminData: action.token

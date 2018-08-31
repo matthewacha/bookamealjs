@@ -42,8 +42,11 @@ class UserMenu extends Component{
         
         }else {
            let menuList = JSON.parse(sessionStorage.getItem('menuItemList'))
+           if(menuList===null){
+            return <tbody><tr><td><div className = "panel-body" > Start by selecting a menu...</div></td></tr></tbody>;
+        } else {
             return menuList.map((menuMeal, index) => {
-                    return <UserMenuView menuMeal={menuMeal} key={index}/>});   
+                    return <UserMenuView menuMeal={menuMeal} key={index}/>}); }  
     
     }}
     
