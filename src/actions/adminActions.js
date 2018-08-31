@@ -14,7 +14,7 @@ export const PostMeal = (mealData) => dispatch=>{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/meals/`, options)
+    return fetch(`http://127.0.0.1:5000/api/v2/meals/`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -33,7 +33,7 @@ export const EditMeal = (mealData,mealID) => dispatch=>{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/meals/${mealID}`, options)
+    return fetch(`http://127.0.0.1:5000/api/v2/meals/${mealID}`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -51,7 +51,7 @@ export const DeleteMeal = mealId => dispatch=>{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/meals/${mealId}`, options)
+    return fetch(`http://127.0.0.1:5000/api/v2/meals/${mealId}`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -68,7 +68,7 @@ export const DeleteMenuMeal = (mealId, menuName) => dispatch=>{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/menus/${menuName}/${mealId}`, options)
+    return fetch(`http://127.0.0.1:5000/api/v2/menus/${menuName}/${mealId}`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -84,7 +84,7 @@ export const GetMeal = mealId => dispatch=>{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/meals/${mealId}`, options)
+    return fetch(`http://127.0.0.1:5000/api/v2/meals/${mealId}`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -103,7 +103,7 @@ export const AddToMenu = (mealId, menuName) => dispatch=>{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/menus/${mealId}`, options)
+    return fetch(`http://127.0.0.1:5000/api/v2/menus/${mealId}`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -114,14 +114,13 @@ export const AddToMenu = (mealId, menuName) => dispatch=>{
 }
 
 export const GetMenu = MenuName => dispatch=>{
-    console.log('Menu loaded..')
     let options = {
         method:'GET',
         headers:{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/getmenus/${MenuName}`, options)
+    return fetch(`http://127.0.0.1:5000/api/v2/getmenus/${MenuName}`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -149,33 +148,32 @@ export const GetMenu = MenuName => dispatch=>{
 //     ))
 // }
 
-export const ChangeMenuActive = (menuName, active) => dispatch=>{
-    console.log("Getting active")
-    let options = {
-        method:'PUT',
-        body:active,
-        headers:{
-            'K_access_token':localStorage.getItem('K_access_token')
-        }
-    }
-    fetch(`http://127.0.0.1:5000/api/v2/menus/${menuName}`, options)
-    .then(response=>response.json())
-    .then(data=>dispatch(
-        {
-            type: SET_ACTIVE,
-            payload: data
-        }
-    ))
-}
+// export const ChangeMenuActive = (menuName, active) => dispatch=>{
+//     console.log("Getting active")
+//     let options = {
+//         method:'PUT',
+//         body:active,
+//         headers:{
+//             'K_access_token':localStorage.getItem('K_access_token')
+//         }
+//     }
+//     fetch(`http://127.0.0.1:5000/api/v2/menus/${menuName}`, options)
+//     .then(response=>response.json())
+//     .then(data=>dispatch(
+//         {
+//             type: SET_ACTIVE,
+//             payload: data
+//         }
+//     ))
+// }
 export const GetMenus = () => dispatch=>{
-    console.log('Menus loaded..')
     let options = {
         method:'GET',
         headers:{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/menus/`, options)
+    return fetch(`http://127.0.0.1:5000/api/v2/menus/`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -185,14 +183,13 @@ export const GetMenus = () => dispatch=>{
     ))
 }
 export const GetMeals = () => dispatch =>{
-    console.log("fetching..")
     let options = {
         method:'GET',
         headers:{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/meals/`, options)
+    return fetch(`http://127.0.0.1:5000/api/v2/meals/`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -202,37 +199,21 @@ export const GetMeals = () => dispatch =>{
     )
 }
 
-export const AddNewMenu = (menuName) =>dispatch=>{
-    let options = {
-        method:'GET',
-        headers:{
-            'K_access_token':localStorage.getItem('K_access_token')
-        }
-    }
-    fetch(`http://127.0.0.1:5000/api/v2/meals/`, options)
-    .then(response=>response.json())
-    .then(data => dispatch({
-        type:ADD_NEW_MENU,
-        newMenuName: data
-    }));
-}
-
 export const getCaterer = (catererName) =>dispatch=>{
- 
     let options = {
         method:'GET',
         headers:{
             'access_token':localStorage.getItem('access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/caterer/${catererName}`, options)
+    return fetch(`http://127.0.0.1:5000/api/v2/caterer/${catererName}`, options)
     .then(response=>response.json())
-    .then(data =>{console.log(data);
+    .then(data =>
         dispatch({
                 type: GET_CATERER,
                 caterers: data
                 })
-            }
+            
 );
 }
 
@@ -245,14 +226,14 @@ export const getCatererMenu = (catererId) =>dispatch=>{
             'access_token':localStorage.getItem('access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/menus/${catererId}`, options)
+    return fetch(`http://127.0.0.1:5000/api/v2/menus/${catererId}`, options)
     .then(response=>response.json())
-    .then(data =>{console.log(data);
+    .then(data =>
         dispatch({
                     type: GET_CATERER_MENU,
                     catererMenu: data
                     })
-                        }
+                        
 );
 }
 
@@ -264,7 +245,7 @@ export const makeOrder = (menuId, mealId) => dispatch=>{
             'access_token':localStorage.getItem('access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/orders/${menuId}/${mealId}`, options)
+    return fetch(`http://127.0.0.1:5000/api/v2/orders/${menuId}/${mealId}`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -282,7 +263,7 @@ export const getOrders = () => dispatch=>{
             'access_token':localStorage.getItem('access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/orders`, options)
+    return fetch(`http://127.0.0.1:5000/api/v2/orders`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -299,7 +280,7 @@ export const getAdminOrders = () => dispatch=>{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/getorder/admin`, options)
+    return fetch(`http://127.0.0.1:5000/api/v2/getorder/admin`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -309,17 +290,16 @@ export const getAdminOrders = () => dispatch=>{
     ))
 }
 
-export const userEditStatus = (orderId) => dispatch=>{
-    let status = {'status':'cancelled'}
+export const userEditStatus = (status, orderId) => dispatch=>{
     let options = {
         method:'PUT',
         body:JSON.stringify(status),
         headers:{
             'content-type':'application/json',
-            'access_token':localStorage.getItem('access_token')
+            'access_token':sessionStorage.getItem('access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/order/user_status/${orderId}`, options)
+    return fetch(`http://127.0.0.1:5000/api/v2/order/user_status/${orderId}`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -338,7 +318,7 @@ export const adminEditStatus = (status, orderId) => dispatch=>{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/order/admin_status/${orderId}`, options)
+    return fetch(`http://127.0.0.1:5000/api/v2/order/admin_status/${orderId}`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {

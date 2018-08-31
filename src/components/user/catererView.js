@@ -4,27 +4,24 @@ import PropTypes from 'prop-types';
 import { getCatererMenu } from '../../actions/adminActions';
 
 
-class CatererView extends Component{
+export class CatererView extends Component{
     onClick = (e) => {
         e.preventDefault();
         let catererId = this.props.caterer.id;
         this.props.getCatererMenu(catererId);
-        sessionStorage.setItem('caterer',this.props.caterer.name)
+        localStorage.setItem('caterer',this.props.caterer.name)
         
     }
 
     render(){
         let caterer = this.props.caterer;
         return (
-            <div>
             <tr style={{"width":"416.67px"}}>
-            <a href="#" onClick={this.onClick} style={{"width":"100%"}}>
-                <td style={{"width":"39%"}}>{caterer.name}</td>
-                <td style={{"width":"45%"}}>{caterer.location}</td>
-                <td style={{"width":"25%"}}>{caterer.phone}</td>
-            </a>
+                <td style={{"width":"39%"}}><a id="name"href="#" onClick={this.onClick} style={{"width":"100%"}}>{caterer.name}</a></td>
+                <td style={{"width":"45%"}}><a href="#" onClick={this.onClick} style={{"width":"100%"}}>{caterer.location}</a></td>
+                <td style={{"width":"25%"}}><a href="#" onClick={this.onClick} style={{"width":"100%"}}>{caterer.phone}</a></td>
             </tr>
-            </div>
+            
         )
     }
 }
