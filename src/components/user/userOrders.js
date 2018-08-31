@@ -7,15 +7,14 @@ import { getOrders } from '../../actions/adminActions';
 
 class UserOrderList extends Component{
     componentDidMount(){
-        if (localStorage.getItem('access_token')===null){
-            this.props.history.push("/login")
-        }
+        // if (localStorage.getItem('access_token')===null){
+        //     this.props.history.push("/login")
+        // }
         this.props.getOrders();
     }
     DisplayOrders= (OrderMeals) =>{
         if(OrderMeals){
         if(OrderMeals.Orders){
-            console.log(OrderMeals.Orders);
             return OrderMeals.Orders.map((order, index) => {
                     return <UserOrderView  order={order} key={index}/>});             
         }

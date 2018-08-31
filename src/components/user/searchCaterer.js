@@ -6,9 +6,7 @@ import { getCaterer } from '../../actions/adminActions';
 class SearchCaterer extends Component{
     onSubmit=(e)=>{
         e.preventDefault();
-		let CatererData = {
-            name: e.target.elements.name.value,};
-        this.props.getCaterer(CatererData.name);
+        this.props.getCaterer(e.target.elements.name.value);
     }
     render(){
         return (
