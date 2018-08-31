@@ -3,13 +3,12 @@ import { connect } from 'react-redux';
 import {notify} from 'react-notify-toast';
 import PropTypes from 'prop-types';
 import { makeOrder, getOrders } from '../../actions/adminActions';
-import { addItemToCart } from './cartExtras';
 
 class UserMenuView extends Component{
     componentWillMount=()=>{
-        if (localStorage.getItem('access_token')===null){
-            this.props.history.push("/login")
-        }
+        // if (localStorage.getItem('access_token')===null){
+        //     this.props.history.push("/login")
+        // }
     }
     
     onClickOrder = (e) => {
@@ -56,4 +55,4 @@ const mapStateToProps = state =>({
     cart: state.admin.cart
 });
 
-export default connect(mapStateToProps, { makeOrder, getOrders, addItemToCart })(UserMenuView);
+export default connect(mapStateToProps, { makeOrder, getOrders })(UserMenuView);
