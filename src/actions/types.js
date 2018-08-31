@@ -28,6 +28,7 @@ export const GET_ORDERS = 'GET_ORDERS';
 export const USER_EDIT_ORDERS = 'USER_EDIT_ORDERS';
 export const DELETE_FROM_CART = 'DELETE_FROM_CART';
 export const ADD_TO_CART = 'ADD_TO_CART';
+export const ADMIN_GET_ORDERS = 'ADMIN_GET_ORDERS';
 
 // helper types
 export const EDIT_STATE = 'EDIT_STATE';
