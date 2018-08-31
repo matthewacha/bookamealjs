@@ -3,35 +3,53 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { userEditStatus, getOrders } from '../../actions/adminActions';
 
-class OrderView extends Component{
+export class UserOrderView extends Component{
     onClick = (e) => {
         e.preventDefault();
-        this.props.userEditStatus(this.props.order.orderId);
+        var timeSpan = Date.now()-Date.parse(this.props.order.when);
+        let status = {status: 'cancelled'}
+        if(timeSpan<120000){
+        this.props.userEditStatus(status, this.props.order.orderId);
+    }
+        this.props.getOrders();
+    }
+    handleButtonToggle = (e) => {
+        e.preventDefault();
+        let status = {status: "delivered"};
+        this.props.userEditStatus(status, this.props.order.orderId);
         this.props.getOrders();
     }
     viewStatus =(order)=>{
-        if(order.status==="processing"){
+        var timeSpan = Date.now()-Date.parse(order.when);
+        if(timeSpan>120000 && order.status==="processing"){
             return <div id="delete-button" style={{padding:"0px"}}>
-            <div className="add-btn" style={{"float":"left","border-radius": "2px",
+            <div className="add-btn" style={{"float":"left","borderRadius": "2px",
+    "width": "75.99px","padding": "0px 5px 0px 5px"}}>{order.status}</div></div>
+        } else if(order.status==="processing"){
+            return <div id="delete-button" style={{padding:"0px"}}>
+            <div className="add-btn" style={{"float":"left","borderRadius": "2px",
     "width": "75.99px","padding": "0px 5px 0px 5px"}}>{order.status}</div>
     <div style={{"width": "91px"}}><a href="" onClick={this.onClick}>
-    <span class="glyphicon glyphicon-remove"></span>
-  </a></div></div>
+    <span className="glyphicon glyphicon-remove"></span>
+  </a></div>
+  </div>
     
         }else if(order.status==="delivered"){
             return <div id="delete-button" style={{padding:"0px"}}>
-            <div className="success-btn" style={{"float":"left","border-radius": "2px",
+            <div className="success-btn" style={{"float":"left","borderRadius": "2px",
     "width": "75.99px","padding": "0px 5px 0px 5px"}}>{order.status}</div></div>
         }else if(order.status==="cancelled"){
             return <div id="delete-button" style={{padding:"0px"}}>
-            <div className="del-btn" style={{"float":"left","border-radius": "2px",
+            <div className="del-btn" style={{"float":"left","borderRadius": "2px",
     "width": "75.99px", "padding": "0px 5px 0px 5px"}}>{order.status}</div></div>
-        }
-    }
+        }else if(order.status==="ready"){
+            return <div id="delete-button" style={{padding:"0px"}}>
+            <div className="ready-btn" style={{"float":"left","borderRadius": "2px",
+    "width": "75.99px","padding": "0px 5px 0px 5px"}}><a style={{"color":"white"}}href="#" onClick={this.handleButtonToggle}>{order.status}</a></div></div>
+    }}
     render(){
         let order = this.props.order;
         return (
-            <tbody>
             <tr>
                 <td>{order.meal.name}</td>
                 <td>{order.meal.price}</td>
@@ -44,15 +62,14 @@ class OrderView extends Component{
                     </div>
                 </td>
             </tr>
-            </tbody>
         )
     }
 }
 
-OrderView.propTypes = {
+UserOrderView.propTypes = {
     order: PropTypes.object.isRequired,
     userEditStatus: PropTypes.func.isRequired,
     getOrders: PropTypes.func.isRequired
 };
 
-export default connect(null, { userEditStatus, getOrders })(OrderView);
+export default connect(null, { userEditStatus, getOrders })(UserOrderView);
