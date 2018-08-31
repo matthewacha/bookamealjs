@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { EditMeal, GetMeals } from '../../actions/adminActions';
 import { EditState } from '../../actions/helperActions';
 
-class EditMealForm extends Component{
+export class EditMealForm extends Component{
     onSubmit=(e)=>{
         e.preventDefault();
 		let mealData = {
@@ -14,7 +14,6 @@ class EditMealForm extends Component{
         this.props.GetMeals();
         let data = {status:false,mealId:this.props.EditMealState.mealId};
         this.props.EditState(data);
-        console.log("editiing..");
     }
     render(){
         return (
@@ -23,11 +22,11 @@ class EditMealForm extends Component{
                       <form className="form-inline" onSubmit={this.onSubmit}>
                           <div className="form-group">
                           <label className="sr-only" >New Meal name </label>
-                          <input type="text" name="name" className="form-control" id ="input-meal" placeholder={this.props.EditMealState.mealName} required/>
+                          <input type="text" name="name" className="form-control" id ="input-meal" placeholder={this.props.EditMealState.mealName}/>
                           </div>
                           <div className="form-group" id = "admin-price">
                           <label className="sr-only" >New Meal price </label>
-                          <input type="integer" name="price" className="form-control" id ="input-meal" placeholder={this.props.EditMealState.mealPrice} required/>
+                          <input type="integer" name="price" className="form-control" id ="input-meal" placeholder={this.props.EditMealState.mealPrice}/>
                           </div><br/>
                           <button className="btn btn-default" id = "add-meal" type="submit">Edit</button>
                       </form>

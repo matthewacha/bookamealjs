@@ -5,8 +5,9 @@ import Notifications from 'react-notify-toast';
 import Signup from './auth/Signup';
 import Login from './auth/Login';
 import UserDash from './user/userDash';
-import adminDash from './admin/adminDash';
-import AdminSign from './admin/adminSignup';
+import AdminDash from './admin/adminDash';
+
+
 class Index extends React.Component{
     render(){
         
@@ -17,12 +18,11 @@ class Index extends React.Component{
                     <Route path = "/signup" exact component = {Signup}/>
                     <Route path = "/login" exact component = {Login}/>
                     <Route path = "/userDash" exact component = {UserDash}/>
-                    <Route path = "/adminDash" exact component = {adminDash}/>
-                    <Route path = "/adminSignup" exact component = {AdminSign}/>
+                    <Route path = "/adminDash" exact component = {AdminDash}/>
 
                     </div>
                 )
             }
 }
 
-export default withRouter(Index);
+export default Index;

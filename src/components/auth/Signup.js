@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import { signUp, signAdmin } from '../../actions/credActions';
 import PropTypes from 'prop-types';
 
-class Signup extends React.Component{
+export class Signup extends React.Component{
 componentWillReceiveProps(singupMessage){
 	if(singupMessage){
 	    if(singupMessage.admin.message){
@@ -46,7 +46,7 @@ componentWillReceiveProps(singupMessage){
 				<nav>
 						<div className="navibar">
 							<ul>
-								<li><a className="nav-log" href="Signup" style={{"padding-top":"0px"}}>Book-A-Meal</a></li>
+								<li><a className="nav-log" href="Signup" style={{"paddingTop":"0px"}}>Book-A-Meal</a></li>
 								<li id="right-but" ><a className="nav-logo" href="Login">Login</a></li>
 							</ul>
 						</div>
@@ -57,14 +57,14 @@ componentWillReceiveProps(singupMessage){
 						<div className="h2">
 							<h2 id="title">Sign Up</h2>
 						</div>
-						<form onSubmit = {this.onSubmit}>
+						<form className = 'signup' onSubmit = {this.onSubmit}>
 							<div className="forms-inputs">
 								<div>
-								<label className="label">Email</label><br/>
-								<input type="email" name = "email" className="form-controls" placeholder="you@email.com" required/><br/><br/>
-								<label className="label">Password</label><br/>
-								<input type="password" name = "password" className="form-controls" placeholder="*********" required/><br/>
-								<Checkbox style ={{"color":"white"}} name = "isadmin" inline>Caterer</Checkbox>
+								<label className="label" id="email-label">Email</label><br/>
+								<input type="email" id="email" name = "email" className="form-controls" placeholder="you@email.com" required/><br/><br/>
+								<label className="label" id="password-label">Password</label><br/>
+								<input type="password" id = "password" name = "password" className="form-controls" placeholder="*********" required/><br/>
+								<Checkbox style ={{"color":"white"}} id ="isadmin" name = "isadmin" inline>Caterer</Checkbox>
 								</div><br/>
 								<div>
 								<button className='submit-button' type="submit">Submit</button>
@@ -89,4 +89,4 @@ const mapStateToProps = state => ({
 	admin: state.user.adminSign
 });
 
-export default withRouter(connect(mapStateToProps, { signUp, signAdmin })(Signup));
+export default connect(mapStateToProps, { signUp, signAdmin })(Signup);

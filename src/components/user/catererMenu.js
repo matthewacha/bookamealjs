@@ -14,25 +14,14 @@ class CatererMenu extends Component{
     //         // }
     // }};
     
-    componentWillMount=()=>{
-        // this.props.GetMenus();
-    };
-
-    CurrentMenu=(menuStuff)=>{
-        console.log(menuStuff);
-        return localStorage.getItem('CurrentMenu')
-    }
-   
-    render(){
-        // const menus=this.props.MenusList;
-        // let MenuListViews = menus.Menus.map((menu,index) => <MenuListView menu={menu} key={index} />);  
+    render(){  
         return (
             <div>
-               <div className="panel-heading" id = "menus-panel">
+               <div className="panel-heading" id = "menus-panel"  style={{"height": "55px"}}>
                         <div className="flex-container menu-admin">
                             <div className="dropdown" id="menus-dropdown">
                                 <ul className="text-center">
-                                    {sessionStorage.getItem('caterer')}
+                                    {localStorage.getItem('caterer')}
                                 </ul>
                             </div>
                         </div>
@@ -44,7 +33,7 @@ class CatererMenu extends Component{
 }
 
 CatererMenu.propTypes = {
-    catererMeals: PropTypes.object.isRequired,
+    catererMeals: PropTypes.object,
 }
 
 const mapStateToProps = state =>({

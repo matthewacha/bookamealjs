@@ -6,19 +6,21 @@ import CatererView from './catererView';
 import { GetMeals } from '../../actions/adminActions';
 import SearchCaterer from './searchCaterer';
 
-class Caterers extends Component{
+export class Caterers extends Component{
     componentWillMount=()=>{
     };    
     NoCaterer = (caterers) => {
         if(caterers){
         if(caterers.message==='undefined'){this.props.history.push("/userDash");}
         else if(caterers.message){
-            return <div className = "panel-body" >Search for caterers</div>
+            return <tr><td className = "panel-body" id="no-return">Search for caterers</td></tr>
             // this.props.history.push("/login");
         }
-        else if(caterers.caterers.length===0){return <div className = "panel-body" >Search for caterers</div>}
+        else if(caterers.caterers.length===0){return <tr><td className = "panel-body" >Search for caterers</td></tr>}
         else { 
-        return (caterers.caterers.map((caterer,index) => <CatererView caterer={caterer} key={index} />));}}
+        return (caterers.caterers.map((caterer,index) => <CatererView caterer={caterer} key={index} />))
+    }
+}
         }
     render(){
         let caterers = this.props.caterers;
@@ -31,15 +33,16 @@ class Caterers extends Component{
                       <div className="content">
                       
                         <table className="menu" >
-                          <th>
+                         <tbody>
+                              <tr>
                               <td style={{"width":"39%"}}>Caterer</td>
                               <td style={{"width":"45%"}}>Location</td>
                               <td style={{"width":"25%"}}>Contact</td>
-
-                          </th>
-                          <tbody>
+                              </tr>
+                         </tbody>
+                         <tbody id="caterers">
                             {this.NoCaterer(caterers)}
-                          </tbody>
+                         </tbody>
                         </table>
 
                       
