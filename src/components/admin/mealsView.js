@@ -2,26 +2,10 @@ import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { DeleteMeal, GetMeals, AddToMenu,
-    GetMenu, ChangeMenuActive, AddNewMenu, DeleteMenuMeal} from '../../actions/adminActions';
+    GetMenu, DeleteMenuMeal} from '../../actions/adminActions';
 import { EditState } from '../../actions/helperActions';
 
-class MealView extends Component{
-    state = {}
-    circularStringify = (object) =>{
-		let simpleObj={};
-				for (let prop in object){
-						if (!object.hasOwnProperty(prop)){
-								continue;
-						}
-						if (typeof(object[prop]) === 'object'){
-								continue;
-						}
-						simpleObj[prop] = object[prop];
-				}
-				return JSON.stringify(simpleObj)
-
-	}
-
+export class MealView extends Component{
     onClickAddToMenu= (e) => {
         e.preventDefault();
         let menuName= {
@@ -59,7 +43,6 @@ class MealView extends Component{
     render(){
         let meal = this.props.meal;
         return (
-            <tbody>
             <tr>
                 <td>{meal.name}</td>
                 <td>{meal.price}</td>
@@ -72,14 +55,12 @@ class MealView extends Component{
                     </div>
                 </td>
             </tr>
-            </tbody>
         )
     }
 }
 
 MealView.propTypes = {
     meal:PropTypes.object.isRequired,
-    ChangeMenuActive:PropTypes.func.isRequired,
     EditState:PropTypes.func.isRequired,
     DeleteMeal:PropTypes.func.isRequired,
     GetMeals: PropTypes.func.isRequired,
@@ -87,7 +68,6 @@ MealView.propTypes = {
     AddToMenu:PropTypes.func.isRequired,
     menulist:PropTypes.object.isRequired,
     newMenuName:PropTypes.object.isRequired,
-    AddNewMenu:PropTypes.func.isRequired,
     DeleteMenuMeal: PropTypes.func.isRequired
 };
  const mapStateToProps = state => ({
@@ -99,5 +79,4 @@ MealView.propTypes = {
  })
 export default connect(mapStateToProps, { DeleteMeal, GetMeals, 
                                         AddToMenu, GetMenu, EditState, 
-                                        ChangeMenuActive,AddNewMenu, 
                                         DeleteMenuMeal})(MealView);

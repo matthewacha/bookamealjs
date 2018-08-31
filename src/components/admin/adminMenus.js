@@ -3,20 +3,12 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MenuView from './MenuView';
-import { GetMenu, AddNewMenu } from '../../actions/adminActions';
+import { GetMenu } from '../../actions/adminActions';
 
-class MenuList extends Component{
-    componentWillReceiveProps(realProp){
-		// if(singupMessage && singupMessage.user.message==="Successfully signed up"){
-		// 	this.props.history.push("/login");
-		// }
-	};
-    
+export class MenuList extends Component{
     componentWillMount=()=>{
         const menuMeals = this.props.TheMenu;
         this.props.GetMenu(localStorage.getItem('CurrentMenu'))
-        // this.props.GetActiveMenu()
-        // if(this.props.TheMenu.Menu.warning){this.props.GetActiveMenu()}
         
     };
     
@@ -28,25 +20,25 @@ class MenuList extends Component{
     }
 
     DisplayMenus= (menuMeals, activeMenu) =>{
-        console.log(menuMeals);
         if(menuMeals.message){
             return <tbody><tr><td><div className = "panel-body" > Start by selecting a menu...</div></td></tr></tbody>;
         }
         if(menuMeals.Menu){
-            console.log(menuMeals.Menu);
-            return menuMeals.Menu.map((menuMeal, index) => {
-                    return <MenuView menuMeal={menuMeal} key={index}/>});             
+            if(menuMeals.Menu[0].warning){
+                return <tbody><tr><td><div className = "panel-body" > {menuMeals.Menu.warning}</div></td></tr></tbody>;
+            }else{
+            return <tbody>{menuMeals.Menu.map((menuMeal, index) => {
+            return <MenuView menuMeal={menuMeal} key={index}/>})}</tbody>; }            
         }
-        else if(activeMenu.Menu===undefined){
+        else if(activeMenu===undefined){
             return <tbody><tr><td><div className = "panel-body" > Start by selecting a menu...</div></td></tr></tbody>;
         }else {
-            menuMeals.Menu.map((menuMeal, index) => {if(menuMeal.mealId!==null){return <MenuView menuMeal={menuMeal} key={index}/>}});}}
+            menuMeals.Menu.map((menuMeal, index) => {if(menuMeal.mealId!==null){return <tbody><MenuView menuMeal={menuMeal} key={index}/></tbody>}});}}
     
 
     render(){
         const menuMeals = this.props.TheMenu;
 
-    // let MenusView =menuMeals.Menu.map((menuMeal, index) => {if(menuMeal.mealId!==null){return <MenuView menuMeal={menuMeal} key={index}/>}}); 
         return (
             
             <div>
@@ -73,10 +65,8 @@ class MenuList extends Component{
 
 MenuList.propTypes = {
     admin: PropTypes.object,
-    OrdersList: PropTypes.object.isRequired,
     GetMenu: PropTypes.func.isRequired,
     TheMenu: PropTypes.object.isRequired,
-    AddNewMenu: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state =>({
@@ -84,4 +74,4 @@ const mapStateToProps = state =>({
 });
 
 
-export default withRouter(connect(mapStateToProps,{ GetMenu, AddNewMenu })(MenuList));
+export default withRouter(connect(mapStateToProps,{ GetMenu })(MenuList));
