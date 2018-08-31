@@ -219,6 +219,15 @@ th li a {
 	float:right;
 }
 
+.ready-btn{
+	text-align: center;
+	background-color: #337ab7;
+	border:0px;
+	margin-left:0px;
+	color:#ffffff;
+	float:right;
+}
+
 /*search forms*/
 
 .form-inputs{
