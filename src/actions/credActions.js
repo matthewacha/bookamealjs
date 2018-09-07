@@ -1,6 +1,5 @@
 import { SIGN_USER, LOGIN_USER, ADMIN_SIGNUP, ADMIN_LOGIN } from './types';
 import history from '../utils/history';
-import { notify } from 'react-notify-toast';
 
 export const signUp=(signData)=>dispatch => {
     if (signData){
@@ -44,41 +43,35 @@ export const logIn=(loginData)=>dispatch => {
     }
 }
 
-export const signAdmin = (signData) => dispatch=> {
+export const signAdmin = () => dispatch=> {
+    console.log("Loging admin...")
     let options = {
-        method: 'POST',
-        body: signData,
+        method:'POST',
         headers: {
-            'Content-Type':'application/json'
+            'access_token':localStorage.getItem('access_token')
                 }
             }
-        fetch(`http://127.0.0.1:5000/api/v2/auth/admins`, options)
+        fetch(`/api/v2/auth/Admin`,options)
         .then(response=>response.json())
         .then(data=>dispatch({
-            type: ADMIN_SIGNUP,
-            payload: data
-        })
-    ) 
-    
+            type:ADMIN_SIGNUP,
+            message:data
+        }))
     }
 
 
-export const loginAdmin = (loginData) => dispatch=> {
+export const loginAdmin = () => dispatch=> {
     let options = {
         method:'POST',
-        body:loginData,
         headers: {
-            'Content-Type':'application/json'
+            'access_token':localStorage.getItem('access_token')
                 }
             }
-        fetch(`http://127.0.0.1:5000/api/v2/auth/adminLogin`,options)
+        fetch(`/api/v2/auth/adminLogin`,options)
         .then(response=>response.json())
-        .then(data=>{dispatch({
+        .then(data=>dispatch({
             type: ADMIN_LOGIN,
             token: data
-        });
-        if(data.token){
-            localStorage.setItem('K_access_token', data.token)}}
-    )
+        }))
     
     }

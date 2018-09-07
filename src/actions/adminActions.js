@@ -2,8 +2,7 @@ import { ADD_MEAL, FETCH_MEALS, FETCH_ORDERS, FETCH_MENU,
     ADMIN_LOGIN, ADMIN_SIGNUP, DELETE_MEAL, ADD_TO_MENU,
      GET_MENU, GET_MEAL,DELETE_MENU_MEAL, GET_MENUS,
       EDIT_MEAL,GET_ACTIVE_MENU, SET_ACTIVE, ADD_NEW_MENU, GET_CATERER,
-      GET_CATERER_MENU, MAKE_ORDER, GET_ORDERS, USER_EDIT_ORDERS,
-      ADMIN_GET_ORDERS } from './types';
+      GET_CATERER_MENU, MAKE_ORDER, GET_ORDERS, USER_EDIT_ORDERS } from './types';
 
 export const PostMeal = (mealData) => dispatch=>{
     let options = {
@@ -14,7 +13,7 @@ export const PostMeal = (mealData) => dispatch=>{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/meals/`, options)
+    fetch(`/api/v2/meals/`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -33,7 +32,7 @@ export const EditMeal = (mealData,mealID) => dispatch=>{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/meals/${mealID}`, options)
+    fetch(`/api/v2/meals/${mealID}`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -51,7 +50,7 @@ export const DeleteMeal = mealId => dispatch=>{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/meals/${mealId}`, options)
+    fetch(`/api/v2/meals/${mealId}`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -68,7 +67,7 @@ export const DeleteMenuMeal = (mealId, menuName) => dispatch=>{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/menus/${menuName}/${mealId}`, options)
+    fetch(`/api/v2/menus/${menuName}/${mealId}`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -84,7 +83,7 @@ export const GetMeal = mealId => dispatch=>{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/meals/${mealId}`, options)
+    fetch(`/api/v2/meals/${mealId}`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -103,7 +102,7 @@ export const AddToMenu = (mealId, menuName) => dispatch=>{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/menus/${mealId}`, options)
+    fetch(`/api/v2/menus/${mealId}`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -121,7 +120,7 @@ export const GetMenu = MenuName => dispatch=>{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/getmenus/${MenuName}`, options)
+    fetch(`/api/v2/menus/${MenuName}`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -158,7 +157,7 @@ export const ChangeMenuActive = (menuName, active) => dispatch=>{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/menus/${menuName}`, options)
+    fetch(`/api/v2/menus/${menuName}`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -175,7 +174,7 @@ export const GetMenus = () => dispatch=>{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/menus/`, options)
+    fetch(`/api/v2/menus/`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -192,7 +191,7 @@ export const GetMeals = () => dispatch =>{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/meals/`, options)
+    fetch(`/api/v2/meals/`, options)
     .then(response=>response.json())
     .then(data=>dispatch(
         {
@@ -209,7 +208,7 @@ export const AddNewMenu = (menuName) =>dispatch=>{
             'K_access_token':localStorage.getItem('K_access_token')
         }
     }
-    fetch(`http://127.0.0.1:5000/api/v2/meals/`, options)
+    fetch(`/api/v2/meals/`, options)
     .then(response=>response.json())
     .then(data => dispatch({
         type:ADD_NEW_MENU,
@@ -229,10 +228,10 @@ export const getCaterer = (catererName) =>dispatch=>{
     .then(response=>response.json())
     .then(data =>{console.log(data);
         dispatch({
-                type: GET_CATERER,
-                caterers: data
-                })
-            }
+                            type: GET_CATERER,
+                            caterers: data
+                            })
+                        }
 );
 }
 
@@ -292,23 +291,6 @@ export const getOrders = () => dispatch=>{
     ))
 }
 
-export const getAdminOrders = () => dispatch=>{
-    let options = {
-        method:'GET',
-        headers:{
-            'K_access_token':localStorage.getItem('K_access_token')
-        }
-    }
-    fetch(`http://127.0.0.1:5000/api/v2/getorder/admin`, options)
-    .then(response=>response.json())
-    .then(data=>dispatch(
-        {
-            type: ADMIN_GET_ORDERS,
-            Orders: data
-        }
-    ))
-}
-
 export const userEditStatus = (orderId) => dispatch=>{
     let status = {'status':'cancelled'}
     let options = {
@@ -324,25 +306,6 @@ export const userEditStatus = (orderId) => dispatch=>{
     .then(data=>dispatch(
         {
             type: USER_EDIT_ORDERS,
-            userOrders: data
-        }
-    ))
-}
-
-export const adminEditStatus = (status, orderId) => dispatch=>{
-    let options = {
-        method:'PUT',
-        body: status,
-        headers:{
-            'content-type':'application/json',
-            'K_access_token':localStorage.getItem('K_access_token')
-        }
-    }
-    fetch(`http://127.0.0.1:5000/api/v2/order/admin_status/${orderId}`, options)
-    .then(response=>response.json())
-    .then(data=>dispatch(
-        {
-            type: 'ADMIN_EDIT_ORDERS',
             userOrders: data
         }
     ))

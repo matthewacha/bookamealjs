@@ -2,7 +2,7 @@ import { ADD_MEAL,EDIT_MEAL, FETCH_MEALS, DELETE_MEAL,
     ADD_TO_MENU, GET_MENU, GET_MEAL, DELETE_MENU_MEAL,
     GET_MENUS, GET_ACTIVE_MENU, SET_ACTIVE,ADD_NEW_MENU
     ,GET_CATERER, GET_CATERER_MENU, GET_ORDERS, MAKE_ORDER,
-    ADMIN_GET_ORDERS } from '../actions/types';
+    ADD_TO_CART, DELETE_FROM_CART } from '../actions/types';
 
 const initialState ={
     mealsList:{Meals:[{warning: "Check your connection..."}]},
@@ -27,8 +27,7 @@ const initialState ={
     catererMenu: undefined,
     makeOrder: undefined,
     userOrders: undefined,
-    cart: undefined,
-    adminOrders: undefined
+    cart: undefined
 };
 
 export default (state=initialState, action)=>{
@@ -65,8 +64,10 @@ export default (state=initialState, action)=>{
             return {...state, makeOrder: action.message}
         case GET_ORDERS:
             return {...state, userOrders: action.userOrders}
-        case ADMIN_GET_ORDERS:
-            return {...state, adminOrders: action.Orders}
+        case ADD_TO_CART:
+            return {...state, cart: action.cart}
+        case DELETE_FROM_CART:
+            return {...state, cart: action.cart}
     default:
         return state
 

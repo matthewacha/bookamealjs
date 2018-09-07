@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CatererView from './catererView';
-import { GetMeals } from '../../actions/adminActions';
+import { GetMeals, PostMeal } from '../../actions/adminActions';
 import SearchCaterer from './searchCaterer';
 
 class Caterers extends Component{
@@ -13,8 +13,7 @@ class Caterers extends Component{
         if(caterers){
         if(caterers.message==='undefined'){this.props.history.push("/userDash");}
         else if(caterers.message){
-            return <div className = "panel-body" >Search for caterers</div>
-            // this.props.history.push("/login");
+            this.props.history.push("/login");
         }
         else if(caterers.caterers.length===0){return <div className = "panel-body" >Search for caterers</div>}
         else { 
