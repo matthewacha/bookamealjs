@@ -1,5 +1,4 @@
 import React from 'react';
-import 'jquery/dist/jquery';
 import '../static/staticCustDash.css'
 import UserOrderList from './userOrders';
 import CatererMenu from './catererMenu';
@@ -15,9 +14,9 @@ componentWillReceiveProps(adminMessage){
 	// console.log(adminMessage)
 }
 componentDidMount=()=>{
-// if (localStorage.getItem('access_token')===null){
-// 	this.props.history.push("/login")
-// }
+if (localStorage.getItem('access_token')===null){
+	this.props.history.push("/login")
+}
 }
 findCaterer=(e)=>{
 e.preventDefault();
@@ -25,6 +24,7 @@ let catererName = {
 	name: e.target.elements.caterer.value
 }
 this.props.getCaterer(catererName.name);
+console.log(this.props)
 }
 
 render (){
@@ -36,9 +36,9 @@ render (){
 						<Link to = "/login" className="navbar-brand">Book-A-Meal</Link>
 						</div>
 						<ul className="nav navbar-nav">
-						<li><a href="#">Home</a></li>
+						<li className="active"><a href="#">Home</a></li>
 						</ul>
-						<p className="navbar-text">Welcome</p>
+						<p className="navbar-text">Welcome Marcello</p>
 						<ul className="nav navbar-nav navbar-right">
 						<li><a href="#"onClick={this.onAdminClick}><span className="glyphicon glyphicon-king"></span> Admin</a></li>
 						<li><a href="/login"><span className="glyphicon glyphicon-log-out"></span> Singout</a></li>
@@ -47,7 +47,7 @@ render (){
 				</nav>
 
 			<div >
-				<div className="flex-container" style = {{"marginBottom":"207px"}}>
+				<div className="flex-container">
 					
 					<div id = "flex-admin-meals" style={{"width":"33%"}}>
 						<div className="panel panel-default">

@@ -29,9 +29,6 @@ class MenuList extends Component{
 
     DisplayMenus= (menuMeals, activeMenu) =>{
         console.log(menuMeals);
-        if(menuMeals.message){
-            return <tbody><tr><td><div className = "panel-body" > Start by selecting a menu...</div></td></tr></tbody>;
-        }
         if(menuMeals.Menu){
             console.log(menuMeals.Menu);
             return menuMeals.Menu.map((menuMeal, index) => {

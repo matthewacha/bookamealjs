@@ -1,32 +1,32 @@
 import React from 'react';
 import '../static/staticHome.css';
-import { Checkbox } from 'react-bootstrap';
+import { Checkbox, FormGroup} from 'react-bootstrap';
 import {notify} from 'react-notify-toast';
 import { PropTypes} from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { logIn, loginAdmin } from '../../actions/credActions';
+import { logIn, loginAdmin, signAdmin } from '../../actions/credActions';
 import { GetMeals } from '../../actions/adminActions';
 
 class Login extends React.Component{
 
 	componentWillReceiveProps(recievedMessage){
 		if(recievedMessage){
+			if(recievedMessage.adminlog.message){
 			// if login as caterer
 				if (recievedMessage.adminlog.message){
-					console.log(recievedMessage.adminlog.message)
 					notify.show(recievedMessage.adminlog.message, 'error')
 				}else if(recievedMessage.adminlog.token){
 					localStorage.setItem('K_access_token', recievedMessage.adminlog.token);
 					notify.show("Successfully logged in",'success')
 					this.props.history.push("/adminDash");
-				}else{
+				}
+			}else{
 				// if login as user
 					if (recievedMessage.userlog.message){
 						notify.show(recievedMessage.userlog.message, 'error')
 					}else if(recievedMessage.userlog.token){
 						notify.show("Successfully logged in",'success')
-						localStorage.setItem('access_token', recievedMessage.userlog.token);
 						this.props.history.push("/userDash");
 					}
 				}
@@ -37,9 +37,10 @@ class Login extends React.Component{
 		e.preventDefault();
 		let credentials = {
 			email: e.target.elements.email.value,
-			password: e.target.elements.password.value,
-			isadmin: e.target.elements.isadmin.checked};
+			password:e.target.elements.password.value,
+			isadmin:e.target.elements.isadmin.checked};
 		if(String(credentials.isadmin)==='true'){
+			this.props.logIn(JSON.stringify(credentials));
 			this.props.loginAdmin(JSON.stringify(credentials));
 		}else{
 			this.props.logIn(JSON.stringify(credentials))
