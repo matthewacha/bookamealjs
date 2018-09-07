@@ -2,9 +2,9 @@ import { SIGN_USER, LOGIN_USER, ADMIN_LOGIN, ADMIN_SIGNUP } from '../actions/typ
 
 const initialState = {
     signMessage:{},
-    loggedData: {},
+    loggedData:{},
     adminSign:{},
-    adminData: {}
+    adminData:{}
 }
 
 export default (state = initialState, action)=>{

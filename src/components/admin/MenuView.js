@@ -5,13 +5,13 @@ import { GetMeal, GetMenu, DeleteMenuMeal } from '../../actions/adminActions';
 
 class MenuView extends Component{
     componentWillMount=()=>{
-    //    console.log(this.props.MealsList);
+       let menuMeals = this.props.MealsList;
     //    this.props.GetMenu(localStorage.getItem('DefaultMenu'));
     }
 
-    actualMealName = (mealId) => {
+    actualMealName = (mealID) => {
         let menuMeals = this.props.MealsList;
-        let meal, result = menuMeals.Meals.map((menuMeal)=>{if(mealId===menuMeal.id){return menuMeal;}});
+        let meal, result = menuMeals.Meals.map((menuMeal, index)=>{if(mealID===menuMeal.id){return menuMeal;}});
         for(meal of result){
             if(meal!==undefined){
                 return meal.name;
@@ -19,9 +19,9 @@ class MenuView extends Component{
         }
     }
 
-    actualMealPrice = (mealId) => {
+    actualMealPrice = (mealID) => {
         let menuMeals = this.props.MealsList;
-        let meal, result = menuMeals.Meals.map((menuMeal, index)=>{if(mealId===menuMeal.id){return menuMeal;}});
+        let meal, result = menuMeals.Meals.map((menuMeal, index)=>{if(mealID===menuMeal.id){return menuMeal;}});
         for(meal of result){
             if(meal!==undefined){
                 return meal.price;
@@ -32,16 +32,17 @@ class MenuView extends Component{
     onClickDelete = (e) => {
         e.preventDefault();
         const CurrentMenu = this.props.menulist.Menu[0].name;
-        this.props.DeleteMenuMeal(this.props.menuMeal.meal_id, CurrentMenu);
+        this.props.DeleteMenuMeal(this.props.menuMeal.mealId,CurrentMenu);
         this.props.GetMenu(CurrentMenu);
         
         this.forceUpdate();
+        console.log(this.props.TheMenu);
     }
     
     render(){
-        var MealName = this.actualMealName(this.props.menuMeal.meal_id);
-        var MealPrice = this.actualMealPrice(this.props.menuMeal.meal_id);
-
+        let Meal = this.props.menuMeal;
+        const MealName = this.actualMealName(this.props.menuMeal.mealId);
+        const MealPrice = this.actualMealPrice(this.props.menuMeal.mealId);
         return (
             <tbody>
             <tr>
@@ -65,6 +66,7 @@ MenuView.propTypes = {
     MealsList:PropTypes.object.isRequired,
     GetMenu: PropTypes.func.isRequired,
     DeleteMenuMeal: PropTypes.func.isRequired,
+    menulist: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state =>({
@@ -72,7 +74,7 @@ const mapStateToProps = state =>({
     GetMenu:PropTypes.func.isRequired,
     Meal: state.admin.Meal,
     MealsList:state.admin.mealsList,
-    menulist: state.admin.menuList
+    menulist:state.admin.menuList
 });
 
 export default connect(mapStateToProps, { GetMeal, GetMenu, DeleteMenuMeal })(MenuView);

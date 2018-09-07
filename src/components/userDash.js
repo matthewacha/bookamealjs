@@ -5,7 +5,7 @@ import MenuList from './custMenu';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { loginAdmin, signAdmin } from '../actions/credActions';
+import { loginAdmin } from '../actions/adminActions';
 
 class UserDash extends React.Component{
 	componentWillReceiveProps(adminMessage){
@@ -22,8 +22,7 @@ class UserDash extends React.Component{
 	}
 	onAdminClick=()=>{
 		// console.log(localStorage.getItem('access_token'));
-		// this.props.signAdmin();
-		this.props.loginAdmin();//this will move
+		this.props.loginAdmin();
 		// console.log(localStorage.getItem('K_access_token'));
 	}
 	render (){
@@ -95,12 +94,10 @@ class UserDash extends React.Component{
 
 UserDash.propTypes = {
 	adminToken: PropTypes.object,
-	loginAdmin: PropTypes.func.isRequired,
-	signAdmin: PropTypes.func.isRequired,
+	loginAdmin: PropTypes.func.isRequired
 }
 const mapStateToProps= state =>({
 	adminToken: state.user.adminData,
-	loginAdmin: PropTypes.func.isRequired,
-	signAdmin: PropTypes.func.isRequired,
+	loginAdmin: PropTypes.func.isRequired
 });
-export default  withRouter(connect(mapStateToProps,{ loginAdmin, signAdmin })(UserDash));
+export default  withRouter(connect(mapStateToProps,{ loginAdmin })(UserDash));

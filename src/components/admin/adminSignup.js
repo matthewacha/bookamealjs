@@ -4,7 +4,7 @@ import { PropTypes} from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { logIn } from '../../actions/credActions';
-import { signAdmin, loginAdmin } from '../../actions/credActions';
+import { signAdmin, loginAdmin } from '../../actions/adminActions';
 
 class AdminSign extends React.Component{
 	// componentWillMount=()=>{

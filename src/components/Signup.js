@@ -2,7 +2,7 @@ import React from 'react';
 import './static/staticHome.css';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { signUp } from '../actions/credActions';
+import { signUp, redirectLogin } from '../actions/credActions';
 import PropTypes from 'prop-types';
 
 class Signup extends React.Component{
@@ -12,12 +12,27 @@ class Signup extends React.Component{
 		}
 	};
 
+	circularStringify = (object) =>{
+			let simpleObj={};
+					for (let prop in object){
+							if (!object.hasOwnProperty(prop)){
+									continue;
+							}
+							if (typeof(object[prop]) === 'object'){
+									continue;
+							}
+							simpleObj[prop] = object[prop];
+					}
+					return JSON.stringify(simpleObj)
+
+    }
+
 	onSubmit = (e)=>{
 		 e.preventDefault();
         let credentials = {
             email: e.target.elements.email.value,
-			password:e.target.elements.password.value,};
-			this.props.signUp(JSON.stringify(credentials));
+			password:e.target.elements.password.value};
+			this.props.signUp(this.circularStringify(credentials));
 	}
 
 
@@ -59,11 +74,13 @@ class Signup extends React.Component{
 
 Signup.propTypes = {
 	signUp:PropTypes.func.isRequired,
+	redirectLogin:PropTypes.func.isRequired,
 	user:PropTypes.object
 }
 
 const mapStateToProps = state => ({
 	user: state.user.signMessage,
+	redirectLogin:PropTypes.func.isRequired
 });
 
-export default withRouter(connect(mapStateToProps, { signUp })(Signup));
+export default withRouter(connect(mapStateToProps, {signUp, redirectLogin})(Signup));
