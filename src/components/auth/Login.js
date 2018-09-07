@@ -14,8 +14,10 @@ class Login extends React.Component{
 		if(recievedMessage){
 			// if login as caterer
 				if (recievedMessage.adminlog.message){
+					console.log(recievedMessage.adminlog.message)
 					notify.show(recievedMessage.adminlog.message, 'error')
 				}else if(recievedMessage.adminlog.token){
+					localStorage.setItem('K_access_token', recievedMessage.adminlog.token);
 					notify.show("Successfully logged in",'success')
 					this.props.history.push("/adminDash");
 				}else{
@@ -50,7 +52,7 @@ class Login extends React.Component{
         <nav>
 		<div className="navibar">
 			<ul>
-				<li><a className="nav-log" href="Signup" style={{"paddingTop":"0px"}}>Book-A-Meal</a></li>
+				<li><a className="nav-log" href="Signup" style={{"padding-top":"0px"}}>Book-A-Meal</a></li>
 				<li id="right-but"><a className="nav-logo" href="Signup">Signup</a></li>
 			</ul>
 	     </div>
@@ -61,14 +63,14 @@ class Login extends React.Component{
 			<div className="h2">
 			<h2 id = "title">Login</h2>
 			</div>
-			<form className="login" onSubmit = { this.onSubmit }>
+			<form onSubmit = { this.onSubmit }>
 				<div className="forms-inputs">
 					<div>
-					  <label className="label" id="email-label">Email</label><br/>
-					  <input type="email" id="email" name = "email" className="form-controls" placeholder="you@email.com" required/><br/><br/>
-				      <label className="label" id="password-label">Password</label><br/>
-					  <input type="password" id="password" name = "password" className="form-controls" placeholder="*********" required/><br/>
-					  <Checkbox style ={{"color":"white"}} id="isadmin" name = "isadmin" inline>Caterer</Checkbox>
+					  <label className="label">Email</label><br/>
+					  <input type="email" name = "email" className="form-controls" placeholder="you@email.com" required/><br/><br/>
+				      <label className="label">Password</label><br/>
+					  <input type="password" name = "password" className="form-controls" placeholder="*********" required/><br/>
+					  <Checkbox style ={{"color":"white"}} name = "isadmin" inline>Caterer</Checkbox>
 					  </div><br/>
 					<div>
 					  <button className='submit-button' type="submit">Submit</button>
@@ -95,4 +97,4 @@ const mapStateToProps = state => ({
 	GetMeals:PropTypes.func.isRequired
 });
 
-export default connect(mapStateToProps, { logIn, loginAdmin, GetMeals} )(Login);
+export default withRouter(connect(mapStateToProps, { logIn, loginAdmin, GetMeals} )(Login));

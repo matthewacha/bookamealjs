@@ -11,6 +11,21 @@ import { loginAdmin, signAdmin } from '../../actions/credActions';
 import { getCaterer } from '../../actions/adminActions';
 
 class UserDash extends React.Component{
+componentWillReceiveProps(adminMessage){
+	// console.log(adminMessage)
+}
+componentDidMount=()=>{
+// if (localStorage.getItem('access_token')===null){
+// 	this.props.history.push("/login")
+// }
+}
+findCaterer=(e)=>{
+e.preventDefault();
+let catererName = {
+	name: e.target.elements.caterer.value
+}
+this.props.getCaterer(catererName.name);
+}
 
 render (){
 		return(
@@ -21,17 +36,18 @@ render (){
 						<Link to = "/login" className="navbar-brand">Book-A-Meal</Link>
 						</div>
 						<ul className="nav navbar-nav">
-	
+						<li><a href="#">Home</a></li>
 						</ul>
 						<p className="navbar-text">Welcome</p>
 						<ul className="nav navbar-nav navbar-right">
-						<li><a id ="signout" href="/login"><span className="glyphicon glyphicon-log-out"></span> Singout</a></li>
+						<li><a href="#"onClick={this.onAdminClick}><span className="glyphicon glyphicon-king"></span> Admin</a></li>
+						<li><a href="/login"><span className="glyphicon glyphicon-log-out"></span> Singout</a></li>
 						</ul>
 					</div>
 				</nav>
 
 			<div >
-				<div className="flex-container" style = {{"marginBottom":"300px"}}>
+				<div className="flex-container" style = {{"marginBottom":"207px"}}>
 					
 					<div id = "flex-admin-meals" style={{"width":"33%"}}>
 						<div className="panel panel-default">
@@ -60,8 +76,8 @@ render (){
 				</div>
 				
 			</div>
-			<footer className="bg-darkest-gray" style={{"backgroundColor":"black"}}>
-				<div className="container" style={{"marginLEft": "0px","width":"100%","marginRight":"0px"}}>
+			<footer className="bg-darkest-gray" style={{"background-color":"black"}}>
+				<div className="container" style={{"margin-left": "0px","width":"100%","margin-right":"0px"}}>
 					<div className="row">
 						<div className="col-md-4">
 							<ul className="list-inline quicklinks">
@@ -73,7 +89,7 @@ render (){
 						
 						</div>
 						<div className="col-md-4">
-							<ul className="list-inline quicklinks" style={{"paddingLeft":"50%"}}>
+							<ul className="list-inline quicklinks" style={{"padding-left":"50%"}}>
 								<li><a href="#">About</a></li>
 
 								<li><a href="#">Terms of service</a></li>

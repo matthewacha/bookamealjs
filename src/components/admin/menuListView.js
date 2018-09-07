@@ -2,7 +2,7 @@ import React, { Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { GetMenu, GetMenus } from '../../actions/adminActions';
-export class MenuListView extends Component{
+class MenuListView extends Component{
     onClickMenu=(e)=>{
         // return name of currently displayed menu
         e.preventDefault();
@@ -28,7 +28,10 @@ export class MenuListView extends Component{
 MenuListView.propTypes = {
     menu:PropTypes.string.isRequired,
     GetMenu:PropTypes.func.isRequired,
+    ChangeMenuActive:PropTypes.func,
     GetMenus:PropTypes.func.isRequired
 };
 
-export default connect(null, { GetMenu, GetMenus })(MenuListView);
+const mapStateToProps = state =>({
+})
+export default connect(mapStateToProps, { GetMenu, GetMenus })(MenuListView);

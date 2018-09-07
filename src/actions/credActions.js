@@ -10,11 +10,11 @@ export const signUp=(signData)=>dispatch => {
             body:signData, 
             headers:{
                 'Content-Type':'application/json'}};
-       return fetch(`http://127.0.0.1:5000/api/v2/auth/signup`,options)
+       fetch(`http://127.0.0.1:5000/api/v2/auth/signup`,options)
        .then (result => result.json())
        .then (data=> dispatch(
         {
-            type: SIGN_USER,
+            type: 'SIGN_USER',
             payload:data
         }
     
@@ -30,7 +30,7 @@ export const logIn=(loginData)=>dispatch => {
             body:loginData, 
             headers:{
                 'Content-Type':'application/json'}};
-       return fetch(`http://127.0.0.1:5000/api/v2/auth/login`,options)
+       fetch(`http://127.0.0.1:5000/api/v2/auth/login`,options)
        .then (result => result.json())
        .then (data=> {dispatch(
         {
@@ -52,7 +52,7 @@ export const signAdmin = (signData) => dispatch=> {
             'Content-Type':'application/json'
                 }
             }
-        return fetch(`http://127.0.0.1:5000/api/v2/auth/admins`, options)
+        fetch(`http://127.0.0.1:5000/api/v2/auth/admins`, options)
         .then(response=>response.json())
         .then(data=>dispatch({
             type: ADMIN_SIGNUP,
@@ -71,35 +71,14 @@ export const loginAdmin = (loginData) => dispatch=> {
             'Content-Type':'application/json'
                 }
             }
-        return fetch(`http://127.0.0.1:5000/api/v2/auth/adminLogin`,options)
+        fetch(`http://127.0.0.1:5000/api/v2/auth/adminLogin`,options)
         .then(response=>response.json())
         .then(data=>{dispatch({
             type: ADMIN_LOGIN,
             token: data
         });
         if(data.token){
-            localStorage.setItem('K_access_token', data.token);}}
+            localStorage.setItem('K_access_token', data.token)}}
     )
     
     }
-
-    export const editAdminInfo = (signData) => dispatch=> {
-        let options = {
-            method: 'PUT',
-            body: signData,
-            headers: {
-                'Content-Type':'application/json',
-                'K_access_token':localStorage.getItem('K_access_token')
-
-                    }
-                }
-            return fetch(`http://127.0.0.1:5000/api/v2/auth/manageAdmin`, options)
-            .then(response=>response.json())
-            .then(data=>dispatch({
-                type: 'ADMIN_EDIT',
-                payload: data
-            })
-        ) 
-        
-        }
-    
