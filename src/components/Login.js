@@ -1,12 +1,12 @@
 import React from 'react';
-import '../static/staticHome.css';
+import './static/staticHome.css';
 import { Checkbox, FormGroup} from 'react-bootstrap';
 import {notify} from 'react-notify-toast';
 import { PropTypes} from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { logIn, loginAdmin, signAdmin } from '../../actions/credActions';
-import { GetMeals } from '../../actions/adminActions';
+import { logIn, loginAdmin, signAdmin } from '../actions/credActions';
+import { GetMeals } from '../actions/adminActions';
 
 class Login extends React.Component{
 
@@ -33,6 +33,21 @@ class Login extends React.Component{
 		}
 	};
 
+	circularStringify = (object) =>{
+		let simpleObj={};
+		for (let prop in object){
+				if (!object.hasOwnProperty(prop)){
+						continue;
+				}
+				if (typeof(object[prop]) === 'object'){
+						continue;
+				}
+				simpleObj[prop] = object[prop];
+		}
+		return JSON.stringify(simpleObj)
+
+	}
+
 	onSubmit = e =>{
 		e.preventDefault();
 		let credentials = {
@@ -40,7 +55,7 @@ class Login extends React.Component{
 			password:e.target.elements.password.value,
 			isadmin:e.target.elements.isadmin.checked};
 		if(String(credentials.isadmin)==='true'){
-			this.props.logIn(JSON.stringify(credentials));
+			this.props.logIn(JSON.stringify(credentials))
 			this.props.loginAdmin(JSON.stringify(credentials));
 		}else{
 			this.props.logIn(JSON.stringify(credentials))
@@ -53,7 +68,7 @@ class Login extends React.Component{
         <nav>
 		<div className="navibar">
 			<ul>
-				<li><a className="nav-log" href="Signup" style={{"padding-top":"0px"}}>Book-A-Meal</a></li>
+				<li><a className="nav-log" href="Signup">Book-A-Meal</a></li>
 				<li id="right-but"><a className="nav-logo" href="Signup">Signup</a></li>
 			</ul>
 	     </div>

@@ -2,9 +2,9 @@ import React from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import Notifications from 'react-notify-toast';
 
-import Signup from './auth/Signup';
-import Login from './auth/Login';
-import UserDash from './user/userDash';
+import Signup from './Signup';
+import Login from './Login';
+import UserDash from './userDash';
 import adminDash from './admin/adminDash';
 import AdminSign from './admin/adminSignup';
 class Index extends React.Component{
