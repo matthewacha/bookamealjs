@@ -1,66 +1,31 @@
-import React from 'react';
-import { mount, shallow, render} from 'enzyme';
-import sinon from 'sinon';
-import PropTypes from 'prop-types';
-import { MemoryRouter } from 'react-router-dom';
-import bookMeal from '../../../utils/store';
-import UserDash from '../userDash';
+import React from "react";
+import { mount, shallow, render } from "enzyme";
+import sinon from "sinon";
+import PropTypes from "prop-types";
+import { MemoryRouter } from "react-router-dom";
+import bookMeal from "../../../utils/store";
+import UserDash from "../userDash";
 
-
-describe('<UserDash/>', () => {
-
-    beforeEach(function() {
-        global.mocklocalStorage = jest.genMockFunction();
-        const mocklocalStorage={
-            getItem: jest.genMockFunction(),
-            setItem: jest.genMockFunction()
-        }
-        global.localStorage = mocklocalStorage
-      })
-    it('includes a title UserDash', () => {
-
-        let  signup = render(<MemoryRouter initialEntries={['/UserDash']} initialIndex={0}>
-                                  <UserDash store = {bookMeal}/>
-                              </MemoryRouter>, {
-                                  context: {store: bookMeal},
-                                  childContextTypes: {store: PropTypes.object.isRequired}
-                              });
-        expect(signup.find('p.navbar-text').text()).toEqual('Welcome');
-
-        });
-
-    it('has order panel', () => {
-
-        let  signup = render(<MemoryRouter initialEntries={['/UserDash']} initialIndex={0}>
-                                    <UserDash store = {bookMeal}/>
-                                </MemoryRouter>, {
-                                    context: {store: bookMeal},
-                                    childContextTypes: {store: PropTypes.object.isRequired}
-                                });
-        expect(signup.find('div#orders-panel').text()).toEqual('My orders');
-
-        });
-    it('has a footer', () => {
-
-        let  signup = render(<MemoryRouter initialEntries={['/UserDash']} initialIndex={0}>
-                                    <UserDash store = {bookMeal}/>
-                                </MemoryRouter>, {
-                                    context: {store: bookMeal},
-                                    childContextTypes: {store: PropTypes.object.isRequired}
-                                });
-        expect(signup.find('footer').length).toEqual(1);
-
-        });
-    it('has a  get in touch in footer', () => {
-
-        let  signup = render(<MemoryRouter initialEntries={['/UserDash']} initialIndex={0}>
-                                    <UserDash store = {bookMeal}/>
-                                </MemoryRouter>, {
-                                    context: {store: bookMeal},
-                                    childContextTypes: {store: PropTypes.object.isRequired}
-                                });
-        expect(signup.find('ul.quicklinks').length).toEqual(2);
-
-        });
+describe("<UserDash/>", () => {
+  const signup = render(
+    <MemoryRouter initialEntries={["/UserDash"]} initialIndex={0}>
+      <UserDash store={bookMeal} />
+    </MemoryRouter>,
+    {
+      context: { store: bookMeal },
+      childContextTypes: { store: PropTypes.object.isRequired }
     }
-    )
+  );
+
+  const testElements = [
+    { element: "p.navbar-text", value: "Welcome" ,title: "includes a title UserDash"},
+    { element: "div#orders-panel", value: "My orders", title: "has order panel" },
+    { element: "footer", value: "Get in touchAboutTerms of service", title: "has a footer" },
+    { element: "ul.quicklinks", value: "Get in touchAboutTerms of service", title: "has a  get in touch in footer"}
+  ];
+  testElements.map(element => {
+    it("includes a title UserDash", () => {
+        expect(signup.find(`${element.element}`).text()).toEqual(`${element.value}`);
+      });
+  })
+});
