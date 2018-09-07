@@ -1,13 +1,16 @@
 import { ADD_MEAL,EDIT_MEAL, FETCH_MEALS, DELETE_MEAL, 
     ADD_TO_MENU, GET_MENU, GET_MEAL, DELETE_MENU_MEAL,
-    GET_MENUS, GET_ACTIVE_MENU, SET_ACTIVE,ADD_NEW_MENU  } from '../actions/types';
+    GET_MENUS } from '../actions/types';
 
 const initialState ={
-    mealsList:{Meals:[{warning: "Check your connection..."}]},
+    mealsList:{Meals:[{id: 6, name: "pie", price: 100}]},
     mealMessage:{},
     deleteMessage:{},
     AddToMenuMessage:{},
-    menuList:{Menu:[{warning:"Check your connection..."
+    menuList:{Menu:[{
+        'mealId':1,
+        'price':'UGX 3000',
+        'day':'21:30:00'
     }]},
     Meal:{
         "Meal": {
@@ -17,10 +20,7 @@ const initialState ={
     },
     DeleteMenuMeal:{},
     menusList:{Menus:['None']},
-    editMeal:{message:"None"},
-    activeMenu:{},
-    activeMenu:"None",
-    newPendingMenu:{}
+    editMeal:{message:"None"}
 };
 
 export default (state=initialState, action)=>{
@@ -32,11 +32,10 @@ export default (state=initialState, action)=>{
         case DELETE_MEAL:
             return {...state, deleteMessage:action.message};
         case FETCH_MEALS:
+        console.log("LEmeals..");
             return {...state, mealsList:action.mealsList}
         case ADD_TO_MENU:
             return {...state, AddToMenuMessage:action.message}
-        case ADD_NEW_MENU:
-            return {...state, newPendingMenu:action.newMenuName}
         case GET_MENU:
             return {...state, menuList:action.payload}
         case GET_MEAL:
@@ -45,10 +44,6 @@ export default (state=initialState, action)=>{
             return {...state, DeleteMenuMeal:action.message}
         case GET_MENUS:
             return {...state, menusList:action.payload}
-        case SET_ACTIVE:
-            return {...state, menuState:action.payload}
-        case GET_ACTIVE_MENU:
-            return {...state, activeMenu:action.payload}
     default:
         return state
 

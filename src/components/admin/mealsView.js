@@ -1,12 +1,10 @@
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { DeleteMeal, GetMeals, AddToMenu,
-    GetMenu, ChangeMenuActive, AddNewMenu, DeleteMenuMeal} from '../../actions/adminActions';
+import { DeleteMeal, GetMeals, AddToMenu, GetMenu } from '../../actions/adminActions';
 import { EditState } from '../../actions/helperActions';
 
 class MealView extends Component{
-    state = {}
     circularStringify = (object) =>{
 		let simpleObj={};
 				for (let prop in object){
@@ -24,26 +22,23 @@ class MealView extends Component{
 
     onClickAddToMenu= (e) => {
         e.preventDefault();
+        const CurrentMenu = this.props.menulist.Menu[0].name;
         let menuName= {
-            name:localStorage.getItem('CurrentMenu')
+            menuName:CurrentMenu
         };
         this.props.AddToMenu(this.props.meal.id, JSON.stringify(menuName));
         this.props.GetMeals();
+        this.props.GetMenu(CurrentMenu);
         this.forceUpdate();
         
     }
 
     onClickDelete = (e) => {
         e.preventDefault();
-        // Delete from menus
-        let ListOfMenus = this.props.MenuNames.Menus
-        ListOfMenus.forEach(menuName => {
-            this.props.DeleteMenuMeal(this.props.meal.id, menuName)
-            
-        });
-        // Delete from meals
         this.props.DeleteMeal(this.props.meal.id);
-        
+        this.props.GetMeals();
+        const CurrentMenu = this.props.menulist.Menu[0].name;
+        this.props.GetMenu(CurrentMenu);
     }
 
     onClickEdit = (e) => {
@@ -58,6 +53,7 @@ class MealView extends Component{
 
     render(){
         let meal = this.props.meal;
+        let mealId = meal.id;
         return (
             <tbody>
             <tr>
@@ -79,25 +75,19 @@ class MealView extends Component{
 
 MealView.propTypes = {
     meal:PropTypes.object.isRequired,
-    ChangeMenuActive:PropTypes.func.isRequired,
     EditState:PropTypes.func.isRequired,
     DeleteMeal:PropTypes.func.isRequired,
     GetMeals: PropTypes.func.isRequired,
     GetMenu: PropTypes.func.isRequired,
     AddToMenu:PropTypes.func.isRequired,
-    menulist:PropTypes.object.isRequired,
-    newMenuName:PropTypes.object.isRequired,
-    AddNewMenu:PropTypes.func.isRequired,
-    DeleteMenuMeal: PropTypes.func.isRequired
+    menulist:PropTypes.object.isRequired
 };
  const mapStateToProps = state => ({
+     DeleteMeal:PropTypes.func.isRequired,
      DeleteMealMessage: state.admin.deleteMessage,
+     AddToMenu:PropTypes.func.isRequired,
      AddToMenuMessage: state.admin.AddToMenuMessage,
-     menulist: state.admin.menuList,
-     MenuNames: state.admin.menusList,
-     newMenuName: state.admin.newPendingMenu
+     menulist:state.admin.menuList,
+     EditState:PropTypes.func.isRequired
  })
-export default connect(mapStateToProps, { DeleteMeal, GetMeals, 
-                                        AddToMenu, GetMenu, EditState, 
-                                        ChangeMenuActive,AddNewMenu, 
-                                        DeleteMenuMeal})(MealView);
+export default connect(mapStateToProps, { DeleteMeal, GetMeals, AddToMenu, GetMenu, EditState })(MealView);

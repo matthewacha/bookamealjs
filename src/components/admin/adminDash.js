@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import '../static/bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import '../static/staticCustDash.css'
 import MealList from './adminMeals';
@@ -48,8 +48,8 @@ class adminDash extends Component{
                 
                         <div id = "flex-admin-menu">
                             <div className="panel panel-default">
-                                    {<AdminMenuDropdown/>}
-                                    {<MenuList/>} 
+                                            <AdminMenuDropdown/>
+                                            <MenuList/> 
                             </div>
                         </div>
                     </div>
