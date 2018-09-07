@@ -1,7 +1,6 @@
 import React from 'react';
 import './static/staticHome.css';
 import { Checkbox, FormGroup} from 'react-bootstrap';
-import {notify} from 'react-notify-toast';
 import { PropTypes} from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -9,24 +8,27 @@ import { logIn, loginAdmin, signAdmin } from '../actions/credActions';
 import { GetMeals } from '../actions/adminActions';
 
 class Login extends React.Component{
+	state = {checked:false}
 
 	componentWillReceiveProps(recievedMessage){
 		if(recievedMessage){
-			if(recievedMessage.adminlog.message){
+			if(recievedMessage.adminlog){
 			// if login as caterer
 				if (recievedMessage.adminlog.message){
-					notify.show(recievedMessage.adminlog.message, 'error')
+					console.log(recievedMessage.adminlog.message);
+					// flash not admin message
 				}else if(recievedMessage.adminlog.token){
 					localStorage.setItem('K_access_token', recievedMessage.adminlog.token);
-					notify.show("Successfully logged in",'success')
 					this.props.history.push("/adminDash");
 				}
-			}else{
+			}else if(recievedMessage.userlog){
 				// if login as user
+				console.log(recievedMessage)
 					if (recievedMessage.userlog.message){
-						notify.show(recievedMessage.userlog.message, 'error')
+						console.log(recievedMessage.userlog.message);
+						// flash unauthorized login
 					}else if(recievedMessage.userlog.token){
-						notify.show("Successfully logged in",'success')
+						localStorage.setItem('access_token', recievedMessage.userlog.token);
 						this.props.history.push("/userDash");
 					}
 				}
@@ -55,9 +57,13 @@ class Login extends React.Component{
 			password:e.target.elements.password.value,
 			isadmin:e.target.elements.isadmin.checked};
 		if(String(credentials.isadmin)==='true'){
+			console.log('administrator')
 			this.props.logIn(JSON.stringify(credentials))
+			console.log(localStorage.getItem('access_token'))
 			this.props.loginAdmin(JSON.stringify(credentials));
+			console.log(localStorage.getItem('K_access_token'))
 		}else{
+			console.log('not administrator')
 			this.props.logIn(JSON.stringify(credentials))
 		};
 	}

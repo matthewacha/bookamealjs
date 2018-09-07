@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, withRouter } from 'react-router-dom';
-import Notifications from 'react-notify-toast';
 
 import Signup from './Signup';
 import Login from './Login';
@@ -12,7 +11,6 @@ class Index extends React.Component{
         
         return (
                     <div>
-                        <Notifications />
                     <Route path = "/" exact render = {() => <Signup/>}/>
                     <Route path = "/signup" exact component = {Signup}/>
                     <Route path = "/login" exact component = {Login}/>
