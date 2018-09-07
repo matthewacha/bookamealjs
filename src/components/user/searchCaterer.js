@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCaterer } from '../../actions/adminActions';
 
-export class SearchCaterer extends Component{
+class SearchCaterer extends Component{
     onSubmit=(e)=>{
         e.preventDefault();
         this.props.getCaterer(e.target.elements.name.value);

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import UserOrderView from './userOrderView';
 import { getOrders } from '../../actions/adminActions';
 
-export class UserOrderList extends Component{
+class UserOrderList extends Component{
     componentDidMount(){
         // if (localStorage.getItem('access_token')===null){
         //     this.props.history.push("/login")
@@ -15,13 +15,13 @@ export class UserOrderList extends Component{
     DisplayOrders= (OrderMeals) =>{
         if(OrderMeals){
         if(OrderMeals.Orders){
-            return<tbody>{OrderMeals.Orders.map((order, index) => {
-                    return <UserOrderView  order={order} key={index}/>})}</tbody>;             
+            return OrderMeals.Orders.map((order, index) => {
+                    return <UserOrderView  order={order} key={index}/>});             
         }
         else if(OrderMeals.Orders===undefined){
-            return <tr><td><div className = "panel-body" > Start by placing an order...</div></td></tr>;
+            return <tbody><tr><td><div className = "panel-body" > Start by placing an order...</div></td></tr></tbody>;
         }else {
-            return <tbody>{OrderMeals.Orders.map((order, index) => {if(order.orderId!==null){return <UserOrderView  order={order} key={index}/>}})}</tbody>}}}
+            OrderMeals.Orders.map((order, index) => {if(order.orderId!==null){return <UserOrderView  order={order} key={index}/>}});}}}
     
     
     render(){
@@ -41,7 +41,7 @@ export class UserOrderList extends Component{
 }
 
 UserOrderList.propTypes = {
-    userOrders: PropTypes.object,
+    userOrders: PropTypes.object.isRequired,
     getOrders: PropTypes.func.isRequired
 }
 

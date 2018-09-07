@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import UserMenuView from './userMenuView';
-import { GetMenu } from '../../actions/adminActions';
+import { GetMenu, AddNewMenu } from '../../actions/adminActions';
 
-export class UserMenu extends Component{
+class UserMenu extends Component{
     componentWillReceiveProps(realProp){
         // console.log(realProp);
 		// if(singupMessage && singupMessage.user.message==="Successfully signed up"){
@@ -21,40 +21,32 @@ export class UserMenu extends Component{
         
     };
     
-    // AddMenuName = (e)=>{
-    //     let menu = {
-    //         name:e.target.elements.name.value
-    //     };
-    //     localStorage.setItem('CurrentMenu', menu.name)
-    // }
+    AddMenuName = (e)=>{
+        let menu = {
+            name:e.target.elements.name.value
+        };
+        localStorage.setItem('CurrentMenu', menu.name)
+    }
 
     DisplayMenus= (menuMeals) =>{
         if(menuMeals){  
         if(menuMeals.Menu){
-            localStorage.setItem('menuItemList', JSON.stringify(menuMeals.Menu))
-            return <tbody>{menuMeals.Menu.map((menuMeal, index) => {
-                return <UserMenuView menuMeal={menuMeal} key={index}/>})}</tbody>;             
+            sessionStorage.setItem('menuItemList', JSON.stringify(menuMeals.Menu))
+            return menuMeals.Menu.map((menuMeal, index) => {
+                    return <UserMenuView menuMeal={menuMeal} key={index}/>});             
         }
         else if(menuMeals.Menu===undefined){
-            return <tbody><tr><td><div className = "panel-body" id="no-menu" > Start by selecting a menu...</div></td></tr></tbody>;
+            return <tbody><tr><td><div className = "panel-body" > Start by selecting a menu...</div></td></tr></tbody>;
         }else if(menuMeals.Menu){
-            menuMeals.Menu.map((menuMeal, index) => {if(menuMeal.mealId!==null){return <tbody><UserMenuView menuMeal={menuMeal} key={index}/></tbody>}});}
+            menuMeals.Menu.map((menuMeal, index) => {if(menuMeal.mealId!==null){return <UserMenuView menuMeal={menuMeal} key={index}/>}});}
         
         }else {
-            // var menulist = JSON.parse(sessionStorage.getItem('menuItemList'));
-            if(localStorage.getItem('menuItemList')!== undefined){
-            var menuList = JSON.parse(localStorage.getItem('menuItemList'));
+           let menuList = JSON.parse(sessionStorage.getItem('menuItemList'))
            if(menuList===null){
-            return <tbody><tr><td><div className = "panel-body"  id="no-session"> Start by selecting a menu...</div></td></tr></tbody>;
-            } else {
-                return menuList.map((menuMeal, index) => {
-                        return <tbody><UserMenuView menuMeal={menuMeal} key={index}/></tbody>});
-                     } 
-                    }
-                        
-        // } else {
-        //     return menuList.map((menuMeal, index) => {
-        //             return <tbody><UserMenuView menuMeal={menuMeal} key={index}/></tbody>}); }  
+            return <tbody><tr><td><div className = "panel-body" > Start by selecting a menu...</div></td></tr></tbody>;
+        } else {
+            return menuList.map((menuMeal, index) => {
+                    return <UserMenuView menuMeal={menuMeal} key={index}/>}); }  
     
     }}
     
@@ -78,7 +70,7 @@ export class UserMenu extends Component{
 }
 
 UserMenu.propTypes = {
-    catererMenu: PropTypes.object
+    catererMenu: PropTypes.object.isRequired
 }
 
 
@@ -87,4 +79,4 @@ const mapStateToProps = state =>({
 });
 
 
-export default withRouter(connect(mapStateToProps,{ GetMenu })(UserMenu));
+export default withRouter(connect(mapStateToProps,{ GetMenu, AddNewMenu })(UserMenu));

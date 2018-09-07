@@ -1,27 +1,19 @@
 import React, { Component} from 'react';
-// import '../static/bootstrap/dist/css/bootstrap.css';
+import '../static/bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 import 'jquery/dist/jquery';
 import '../static/staticCustDash.css'
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { ModalManager } from 'react-dynamic-modal';
+import { Link, withRouter } from 'react-router-dom';
+import { Modal, ModalManager } from 'react-dynamic-modal';
 import MealList from './adminMeals';
 import OrderList from './adminOrders';
 import MenuList from './adminMenus';
 import AdminSettingsModal from './adminSettingsModal'
 import AdminMenuDropdown from './adminMenuDropdown';
-import bookMeal from '../../utils/store';
-import { signOutUser } from '../../utils/helper';
 
-export class AdminDash extends Component{
-    signOut= (e) => {
-        e.preventDefault();
-        this.props.signOutUser;
-        this.props.history.push('/login');
-    }
+class adminDash extends Component{
     openModal(){
-        ModalManager.open(<AdminSettingsModal store= {bookMeal} onRequestClose={() => true}/>);
+        ModalManager.open(<AdminSettingsModal onRequestClose={() => true}/>);
      }
     render(){
         
@@ -33,11 +25,25 @@ export class AdminDash extends Component{
 						<Link to = "/login" className="navbar-brand">Book-A-Meal</Link>
 						</div>
 						<ul className="nav navbar-nav navbar-right navbar-header">
-						<li><a href="#" id="settings" onClick={this.openModal}><span className="glyphicon glyphicon-cog"></span></a></li>
-						<li><a href="#" id="signout"onClick={this.signOut}><span className="glyphicon glyphicon-log-out"></span> Singout</a></li>
+						<li><a href="#"onClick={this.openModal}><span className="glyphicon glyphicon-cog" style={{"backgroundColor":"gray"}}></span></a></li>
+						<li><a href="/login"><span className="glyphicon glyphicon-log-out"></span> Singout</a></li>
 						</ul>
 					</div>
 				</nav>
+                {/* <nav>
+                    <div className="navibar">
+                        <ul style={{"margin-top":"5px"}}>
+                            <li className="nav-logo">Welcome, Admin!</li>
+                            <li><a className="nav-logo" href="adminHistory">View History</a></li>
+                            <li><a href="#"onClick={this.onAdminClick}><span className="glyphicon glyphicon-king"></span> Admin</a></li>
+                            <li id = "right-but"><a className="nav-logo" href="login">Sign out</a></li>
+                        </ul>
+                        <ul className="nav navbar-nav navbar-right">
+						<li><a href="#"onClick={this.onAdminClick}><span className="glyphicon glyphicon-king"></span> Admin</a></li>
+						<li><a href="/login"><span className="glyphicon glyphicon-log-out"></span> Singout</a></li>
+						</ul>
+                    </div>
+                </nav> */}
                 <div >
                     <div className="flex-container" style = {{"marginBottom":"180px"}}>
                         
@@ -71,8 +77,8 @@ export class AdminDash extends Component{
                     </div>
                     
                 </div>
-                <footer className="bg-darkest-gray" style={{"backgroundColor":"black"}}>
-                    <div className="container" style={{"marginLeft": "0px","width":"100%","marginRight":"0px"}}>
+                <footer className="bg-darkest-gray" style={{"background-color":"black"}}>
+                    <div className="container" style={{"margin-left": "0px","width":"100%","margin-right":"0px"}}>
                         <div className="row">
                             <div className="col-md-4">
                                 <ul className="list-inline quicklinks">
@@ -84,7 +90,7 @@ export class AdminDash extends Component{
                             
                             </div>
                             <div className="col-md-4">
-                                <ul className="list-inline quicklinks" style={{"paddingLeft":"50%"}}>
+                                <ul className="list-inline quicklinks" style={{"padding-left":"50%"}}>
                                     <li><a href="#">About</a></li>
 
                                     <li><a href="#">Terms of service</a></li>
@@ -98,8 +104,4 @@ export class AdminDash extends Component{
     }
 }
 
-AdminDash.propTypes = {
-    signOutUser: PropTypes.func.isRequired,
-}
-
-export default connect(null,{ signOutUser })(AdminDash);
+export default adminDash;

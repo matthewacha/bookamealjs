@@ -1,39 +1,32 @@
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import history from '../../utils/history';
 import { GetMeal, GetMenu, DeleteMenuMeal } from '../../actions/adminActions';
 
-export class MenuView extends Component{
+class MenuView extends Component{
     componentWillMount=()=>{
+    //    console.log(this.props.MealsList);
+    //    this.props.GetMenu(localStorage.getItem('DefaultMenu'));
     }
 
     actualMealName = (mealId) => {
         let menuMeals = this.props.MealsList;
-        if(menuMeals.Meals===undefined){
-            // history.push("/login");
-        }else{
-            let meal, result = menuMeals.Meals.map((menuMeal)=>{if(mealId===menuMeal.id){return menuMeal;}});
-            for(meal of result){
-                if(meal!==undefined){
-                    return meal.name;
-                }
+        let meal, result = menuMeals.Meals.map((menuMeal)=>{if(mealId===menuMeal.id){return menuMeal;}});
+        for(meal of result){
+            if(meal!==undefined){
+                return meal.name;
             }
         }
     }
 
     actualMealPrice = (mealId) => {
         let menuMeals = this.props.MealsList;
-        if(menuMeals.Meals===undefined){
-            // history.push("/login");
-        }else{
-    
         let meal, result = menuMeals.Meals.map((menuMeal, index)=>{if(mealId===menuMeal.id){return menuMeal;}});
         for(meal of result){
             if(meal!==undefined){
                 return meal.price;
             }
-        }}
+        }
     }
     
     onClickDelete = (e) => {
@@ -50,6 +43,7 @@ export class MenuView extends Component{
         var MealPrice = this.actualMealPrice(this.props.menuMeal.meal_id);
 
         return (
+            <tbody>
             <tr>
                 <td>{MealName}</td>
                 <td>{MealPrice}</td>
@@ -59,14 +53,15 @@ export class MenuView extends Component{
                     </div>
                 </td>
             </tr>
+            </tbody>
         )
     }
 }
 
 
 MenuView.propTypes = {
-    Meal:PropTypes.object,
-    GetMeal:PropTypes.func,
+    Meal:PropTypes.object.isRequired,
+    GetMeal:PropTypes.func.isRequired,
     MealsList:PropTypes.object.isRequired,
     GetMenu: PropTypes.func.isRequired,
     DeleteMenuMeal: PropTypes.func.isRequired,

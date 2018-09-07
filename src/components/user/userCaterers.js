@@ -6,21 +6,19 @@ import CatererView from './catererView';
 import { GetMeals } from '../../actions/adminActions';
 import SearchCaterer from './searchCaterer';
 
-export class Caterers extends Component{
+class Caterers extends Component{
     componentWillMount=()=>{
     };    
     NoCaterer = (caterers) => {
         if(caterers){
         if(caterers.message==='undefined'){this.props.history.push("/userDash");}
         else if(caterers.message){
-            return <tr><td className = "panel-body" id="no-return">Search for caterers</td></tr>
+            return <div className = "panel-body" >Search for caterers</div>
             // this.props.history.push("/login");
         }
-        else if(caterers.caterers.length===0){return <tr><td className = "panel-body" >Search for caterers</td></tr>}
+        else if(caterers.caterers.length===0){return <div className = "panel-body" >Search for caterers</div>}
         else { 
-        return (caterers.caterers.map((caterer,index) => <CatererView caterer={caterer} key={index} />))
-    }
-}
+        return (caterers.caterers.map((caterer,index) => <CatererView caterer={caterer} key={index} />));}}
         }
     render(){
         let caterers = this.props.caterers;
@@ -33,16 +31,15 @@ export class Caterers extends Component{
                       <div className="content">
                       
                         <table className="menu" >
-                         <tbody>
-                              <tr>
+                          <th>
                               <td style={{"width":"39%"}}>Caterer</td>
                               <td style={{"width":"45%"}}>Location</td>
                               <td style={{"width":"25%"}}>Contact</td>
-                              </tr>
-                         </tbody>
-                         <tbody id="caterers">
+
+                          </th>
+                          <tbody>
                             {this.NoCaterer(caterers)}
-                         </tbody>
+                          </tbody>
                         </table>
 
                       

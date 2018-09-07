@@ -3,17 +3,33 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { PostMeal, GetMeals } from '../../actions/adminActions';
 
-export class AddMealForm extends Component{
+class AddMealForm extends Component{
+    circularStringify = (object) =>{
+		let simpleObj={};
+				for (let prop in object){
+						if (!object.hasOwnProperty(prop)){
+								continue;
+						}
+						if (typeof(object[prop]) === 'object'){
+								continue;
+						}
+						simpleObj[prop] = object[prop];
+				}
+				return JSON.stringify(simpleObj)
+
+	}
+
 
     onSubmit=(e)=>{
         e.preventDefault();
 		let mealData = {
 			name: e.target.elements.name.value,
             price:e.target.elements.price.value};
-        this.props.PostMeal(JSON.stringify(mealData));
+        this.props.PostMeal(this.circularStringify(mealData));
         this.props.GetMeals();
     }
     render(){
+        console.log(this.props.addMealMessage);
         return (
             <div>
                 <h3>Add meal</h3>
@@ -40,5 +56,6 @@ AddMealForm.propTypes = {
 
 const mapSateToProps= state => ({
     PostMeal:PropTypes.func.isRequired,
+    addMealMessage: state.admin.mealMessage
 })
 export default connect(mapSateToProps, { PostMeal, GetMeals })(AddMealForm);
