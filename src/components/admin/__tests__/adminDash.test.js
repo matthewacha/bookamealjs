@@ -16,19 +16,6 @@ describe('<AdminDash/>', () => {
             setItem: jest.genMockFunction()
         }
         global.localStorage = mocklocalStorage
-        // global.sessionStorage = jest.genMockFunction();
-        // global.sessionStorage.setItem = jest.genMockFunction();
-        // global.sessionStorage.getItem = jest.genMockFunction();
-        // var spy1 = sinon.spy(window.sessionStorage, "setItem");
-        // var JSONData = {
-        //     Menus: ['monday', 'tuesday']
-        // }
-        // spy1.calledWith('menuItemList', JSONData)
-        // var JSONData = {
-        //     Menus: ['monday', 'tuesday']
-        // };
-        // var stub1 = sinon.stub(window.sessionStorage, "getItem");
-        // stub1.returns(JSON.stringify(JSONData)); 
         
       })
     it('includes a title AdminDash', () => {
