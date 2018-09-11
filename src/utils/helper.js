@@ -12,7 +12,7 @@ export const getTotal = (prop) => {
     var createdTime = Date.parse(meal.when);
     var currentTime = Date.now();
     let duration = currentTime-createdTime;
-    if(duration<43200000){
+    if(duration<43200000 && meal.status==='ready'){
         listOfMealTotal.push(meal.meal.price)
     }    
     });

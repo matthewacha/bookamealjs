@@ -1,329 +1,260 @@
-import { ADD_MEAL, FETCH_MEALS, FETCH_ORDERS, FETCH_MENU, 
-    ADMIN_LOGIN, ADMIN_SIGNUP, DELETE_MEAL, ADD_TO_MENU,
-     GET_MENU, GET_MEAL,DELETE_MENU_MEAL, GET_MENUS,
-      EDIT_MEAL,GET_ACTIVE_MENU, SET_ACTIVE, ADD_NEW_MENU, GET_CATERER,
-      GET_CATERER_MENU, MAKE_ORDER, GET_ORDERS, USER_EDIT_ORDERS,
-      ADMIN_GET_ORDERS } from './types';
+import * as constants from "./types";
 
-export const PostMeal = (mealData) => dispatch=>{
-    let options = {
-        method:'POST',
-        body:mealData,
-        headers:{
-            'content-type':'application/json',
-            'K_access_token':localStorage.getItem('K_access_token')
-        }
-    }
-    return fetch(`http://127.0.0.1:5000/api/v2/meals/`, options)
-    .then(response=>response.json())
-    .then(data=>dispatch(
-        {
-            type:ADD_MEAL,
-            message:data
-        }
-    ))
-}
+let optionFetch = (method, body = undefined, headers) => {
+  if (method === "PUT" || method === "POST") {
+    return {
+      method: method,
+      body: body,
+      headers: headers
+    };
+  } else {
+    return {
+      method: method,
+      headers: headers
+    };
+  }
+};
+export const PostMeal = mealData => dispatch => {
+  let options = optionFetch("POST", mealData, {
+    "content-type": "application/json",
+    K_access_token: localStorage.getItem("K_access_token")
+  });
+  return fetch(`http://127.0.0.1:5000/api/v2/meals/`, options)
+    .then(response => response.json())
+    .then(data =>
+      dispatch({
+        type: constants.ADD_MEAL,
+        message: data
+      })
+    );
+};
 
-export const EditMeal = (mealData,mealID) => dispatch=>{
-    let options = {
-        method:'PUT',
-        body: mealData,
-        headers:{
-            'content-type':'application/json',
-            'K_access_token':localStorage.getItem('K_access_token')
-        }
-    }
-    return fetch(`http://127.0.0.1:5000/api/v2/meals/${mealID}`, options)
-    .then(response=>response.json())
-    .then(data=>dispatch(
-        {
-            type: EDIT_MEAL,
-            message: data
-        }
-    ))
-}
+export const EditMeal = (mealData, mealID) => dispatch => {
+  let options = optionFetch("PUT", mealData, {
+    "content-type": "application/json",
+    K_access_token: localStorage.getItem("K_access_token")
+  });
+  return fetch(`http://127.0.0.1:5000/api/v2/meals/${mealID}`, options)
+    .then(response => response.json())
+    .then(data =>
+      dispatch({
+        type: constants.EDIT_MEAL,
+        message: data
+      })
+    );
+};
 
-export const DeleteMeal = mealId => dispatch=>{
-    if(mealId!=='undefined'){
+export const DeleteMeal = mealId => dispatch => {
+  if (mealId !== "undefined") {
     let options = {
-        method:'DELETE',
-        headers:{
-            'K_access_token':localStorage.getItem('K_access_token')
-        }
-    }
+      method: "DELETE",
+      headers: {
+        K_access_token: localStorage.getItem("K_access_token")
+      }
+    };
     return fetch(`http://127.0.0.1:5000/api/v2/meals/${mealId}`, options)
-    .then(response=>response.json())
-    .then(data=>dispatch(
-        {
-            type:DELETE_MEAL,
-            message:data
-        }
-    ))}
-}
-
-export const DeleteMenuMeal = (mealId, menuName) => dispatch=>{
-    let options = {
-        method:'DELETE',
-        headers:{
-            'K_access_token':localStorage.getItem('K_access_token')
-        }
-    }
-    return fetch(`http://127.0.0.1:5000/api/v2/menus/${menuName}/${mealId}`, options)
-    .then(response=>response.json())
-    .then(data=>dispatch(
-        {
-            type: DELETE_MENU_MEAL,
-            message: data
-        }
-    ))
-}
-export const GetMeal = mealId => dispatch=>{
-    let options = {
-        method:'GET',
-        headers:{
-            'K_access_token':localStorage.getItem('K_access_token')
-        }
-    }
-    return fetch(`http://127.0.0.1:5000/api/v2/meals/${mealId}`, options)
-    .then(response=>response.json())
-    .then(data=>dispatch(
-        {
-            type:GET_MEAL,
-            payload:data
-        }
-    ))
-}
-
-export const AddToMenu = (mealId, menuName) => dispatch=>{
-    let options = {
-        method:'POST',
-        body:menuName,
-        headers:{
-            'content-type':'application/json',
-            'K_access_token':localStorage.getItem('K_access_token')
-        }
-    }
-    return fetch(`http://127.0.0.1:5000/api/v2/menus/${mealId}`, options)
-    .then(response=>response.json())
-    .then(data=>dispatch(
-        {
-            type:ADD_TO_MENU,
-            message:data
-        }
-    ))
-}
-
-export const GetMenu = MenuName => dispatch=>{
-    let options = {
-        method:'GET',
-        headers:{
-            'K_access_token':localStorage.getItem('K_access_token')
-        }
-    }
-    return fetch(`http://127.0.0.1:5000/api/v2/getmenus/${MenuName}`, options)
-    .then(response=>response.json())
-    .then(data=>dispatch(
-        {
-            type: GET_MENU,
-            payload: data
-        }
-    ))
-}
-
-// export const GetActiveMenu = () => dispatch=>{
-//     console.log("Getting active")
-//     let options = {
-//         method:'GET',
-//         headers:{
-//             'K_access_token':localStorage.getItem('K_access_token')
-//         }
-//     }
-//     fetch(`/api/v2/menu/`, options)
-//     .then(response=>response.json())
-//     .then(data=>dispatch(
-//         {
-//             type: GET_ACTIVE_MENU,
-//             payload: data
-//         }
-//     ))
-// }
-
-// export const ChangeMenuActive = (menuName, active) => dispatch=>{
-//     console.log("Getting active")
-//     let options = {
-//         method:'PUT',
-//         body:active,
-//         headers:{
-//             'K_access_token':localStorage.getItem('K_access_token')
-//         }
-//     }
-//     fetch(`http://127.0.0.1:5000/api/v2/menus/${menuName}`, options)
-//     .then(response=>response.json())
-//     .then(data=>dispatch(
-//         {
-//             type: SET_ACTIVE,
-//             payload: data
-//         }
-//     ))
-// }
-export const GetMenus = () => dispatch=>{
-    let options = {
-        method:'GET',
-        headers:{
-            'K_access_token':localStorage.getItem('K_access_token')
-        }
-    }
-    return fetch(`http://127.0.0.1:5000/api/v2/menus/`, options)
-    .then(response=>response.json())
-    .then(data=>dispatch(
-        {
-            type: GET_MENUS,
-            payload:data
-        }
-    ))
-}
-export const GetMeals = () => dispatch =>{
-    let options = {
-        method:'GET',
-        headers:{
-            'K_access_token':localStorage.getItem('K_access_token')
-        }
-    }
-    return fetch(`http://127.0.0.1:5000/api/v2/meals/`, options)
-    .then(response=>response.json())
-    .then(data=>dispatch(
-        {
-            type:FETCH_MEALS,
-            mealsList:data
+      .then(response => response.json())
+      .then(data =>
+        dispatch({
+          type: constants.DELETE_MEAL,
+          message: data
         })
-    )
-}
+      );
+  }
+};
 
-export const getCaterer = (catererName) =>dispatch=>{
-    let options = {
-        method:'GET',
-        headers:{
-            'access_token':localStorage.getItem('access_token')
-        }
-    }
-    return fetch(`http://127.0.0.1:5000/api/v2/caterer/${catererName}`, options)
-    .then(response=>response.json())
+export const DeleteMenuMeal = (mealId, menuName) => dispatch => {
+  let options = optionFetch("DELETE", undefined, {
+    K_access_token: localStorage.getItem("K_access_token")
+  });
+  return fetch(
+    `http://127.0.0.1:5000/api/v2/menus/${menuName}/${mealId}`,
+    options
+  )
+    .then(response => response.json())
     .then(data =>
-        dispatch({
-                type: GET_CATERER,
-                caterers: data
-                })
-            
-);
-}
-
-
-export const getCatererMenu = (catererId) =>dispatch=>{
- 
-    let options = {
-        method:'GET',
-        headers:{
-            'access_token':localStorage.getItem('access_token')
-        }
-    }
-    return fetch(`http://127.0.0.1:5000/api/v2/menus/${catererId}`, options)
-    .then(response=>response.json())
+      dispatch({
+        type: constants.DELETE_MENU_MEAL,
+        message: data
+      })
+    );
+};
+export const GetMeal = mealId => dispatch => {
+  let options = optionFetch("GET", undefined, {
+    K_access_token: localStorage.getItem("K_access_token")
+  });
+  return fetch(`http://127.0.0.1:5000/api/v2/meals/${mealId}`, options)
+    .then(response => response.json())
     .then(data =>
-        dispatch({
-                    type: GET_CATERER_MENU,
-                    catererMenu: data
-                    })
-                        
-);
-}
+      dispatch({
+        type: constants.GET_MEAL,
+        payload: data
+      })
+    );
+};
 
-export const makeOrder = (menuId, mealId) => dispatch=>{
-    let options = {
-        method:'POST',
-        headers:{
-            'content-type':'application/json',
-            'access_token':localStorage.getItem('access_token')
-        }
-    }
-    return fetch(`http://127.0.0.1:5000/api/v2/orders/${menuId}/${mealId}`, options)
-    .then(response=>response.json())
-    .then(data=>dispatch(
-        {
-            type: MAKE_ORDER,
-            message: data
-        }
-    ))
-}
+export const AddToMenu = (mealId, menuName) => dispatch => {
+  let options = optionFetch("POST", menuName, {
+    "content-type": "application/json",
+    K_access_token: localStorage.getItem("K_access_token")
+  });
+  return fetch(`http://127.0.0.1:5000/api/v2/menus/${mealId}`, options)
+    .then(response => response.json())
+    .then(data =>
+      dispatch({
+        type: constants.ADD_TO_MENU,
+        message: data
+      })
+    );
+};
 
-export const getOrders = () => dispatch=>{
-    let options = {
-        method:'GET',
-        headers:{
-            'content-type':'application/json',
-            'access_token':localStorage.getItem('access_token')
-        }
-    }
-    return fetch(`http://127.0.0.1:5000/api/v2/orders`, options)
-    .then(response=>response.json())
-    .then(data=>dispatch(
-        {
-            type: GET_ORDERS,
-            userOrders: data
-        }
-    ))
-}
+export const GetMenu = MenuName => dispatch => {
+  let options = optionFetch("GET", undefined, {
+    K_access_token: localStorage.getItem("K_access_token")
+  });
+  return fetch(`http://127.0.0.1:5000/api/v2/getmenus/${MenuName}`, options)
+    .then(response => response.json())
+    .then(data =>
+      dispatch({
+        type: constants.GET_MENU,
+        payload: data
+      })
+    );
+};
+export const GetMenus = () => dispatch => {
+  let options = optionFetch("GET", undefined, {
+    K_access_token: localStorage.getItem("K_access_token")
+  });
+  return fetch(`http://127.0.0.1:5000/api/v2/menus/`, options)
+    .then(response => response.json())
+    .then(data =>
+      dispatch({
+        type: constants.GET_MENUS,
+        payload: data
+      })
+    );
+};
+export const GetMeals = () => dispatch => {
+  let options = optionFetch("GET", undefined, {
+    K_access_token: localStorage.getItem("K_access_token")
+  });
+  return fetch(`http://127.0.0.1:5000/api/v2/meals/`, options)
+    .then(response => response.json())
+    .then(data =>
+      dispatch({
+        type: constants.FETCH_MEALS,
+        mealsList: data
+      })
+    );
+};
 
-export const getAdminOrders = () => dispatch=>{
-    let options = {
-        method:'GET',
-        headers:{
-            'K_access_token':localStorage.getItem('K_access_token')
-        }
-    }
-    return fetch(`http://127.0.0.1:5000/api/v2/getorder/admin`, options)
-    .then(response=>response.json())
-    .then(data=>dispatch(
-        {
-            type: ADMIN_GET_ORDERS,
-            Orders: data
-        }
-    ))
-}
+export const getCaterer = catererName => dispatch => {
+  let options = optionFetch("GET", undefined, {
+    access_token: localStorage.getItem("access_token")
+  });
+  return fetch(`http://127.0.0.1:5000/api/v2/caterer/${catererName}`, options)
+    .then(response => response.json())
+    .then(data =>
+      dispatch({
+        type: constants.GET_CATERER,
+        caterers: data
+      })
+    );
+};
 
-export const userEditStatus = (status, orderId) => dispatch=>{
-    let options = {
-        method:'PUT',
-        body:JSON.stringify(status),
-        headers:{
-            'content-type':'application/json',
-            'access_token':sessionStorage.getItem('access_token')
-        }
-    }
-    return fetch(`http://127.0.0.1:5000/api/v2/order/user_status/${orderId}`, options)
-    .then(response=>response.json())
-    .then(data=>dispatch(
-        {
-            type: USER_EDIT_ORDERS,
-            userOrders: data
-        }
-    ))
-}
+export const getCatererMenu = catererId => dispatch => {
+  let options = optionFetch("GET", undefined, {
+    access_token: localStorage.getItem("access_token")
+  });
+  return fetch(`http://127.0.0.1:5000/api/v2/menus/${catererId}`, options)
+    .then(response => response.json())
+    .then(data =>
+      dispatch({
+        type: constants.GET_CATERER_MENU,
+        catererMenu: data
+      })
+    );
+};
 
-export const adminEditStatus = (status, orderId) => dispatch=>{
-    let options = {
-        method:'PUT',
-        body: status,
-        headers:{
-            'content-type':'application/json',
-            'K_access_token':localStorage.getItem('K_access_token')
-        }
-    }
-    return fetch(`http://127.0.0.1:5000/api/v2/order/admin_status/${orderId}`, options)
-    .then(response=>response.json())
-    .then(data=>dispatch(
-        {
-            type: 'ADMIN_EDIT_ORDERS',
-            userOrders: data
-        }
-    ))
-}
+export const makeOrder = (menuId, mealId) => dispatch => {
+  let options = optionFetch("POST", undefined, {
+    "content-type": "application/json",
+    access_token: localStorage.getItem("access_token")
+  });
+  return fetch(
+    `http://127.0.0.1:5000/api/v2/orders/${menuId}/${mealId}`,
+    options
+  )
+    .then(response => response.json())
+    .then(data =>
+      dispatch({
+        type: constants.MAKE_ORDER,
+        message: data
+      })
+    );
+};
+
+export const getOrders = () => dispatch => {
+  let options = optionFetch("GET", undefined, {
+    "content-type": "application/json",
+    access_token: localStorage.getItem("access_token")
+  });
+  return fetch(`http://127.0.0.1:5000/api/v2/orders`, options)
+    .then(response => response.json())
+    .then(data =>
+      dispatch({
+        type: constants.GET_ORDERS,
+        userOrders: data
+      })
+    );
+};
+
+export const getAdminOrders = () => dispatch => {
+  let options = optionFetch("GET", undefined, {
+    K_access_token: localStorage.getItem("K_access_token")
+  });
+  return fetch(`http://127.0.0.1:5000/api/v2/getorder/admin`, options)
+    .then(response => response.json())
+    .then(data =>
+      dispatch({
+        type: constants.ADMIN_GET_ORDERS,
+        Orders: data
+      })
+    );
+};
+
+export const userEditStatus = (status, orderId) => dispatch => {
+  let options = optionFetch("PUT", JSON.stringify(status), {
+    "content-type": "application/json",
+    access_token: localStorage.getItem("access_token")
+  });
+  return fetch(
+    `http://127.0.0.1:5000/api/v2/order/user_status/${orderId}`,
+    options
+  )
+    .then(response => response.json())
+    .then(data =>
+      dispatch({
+        type: constants.USER_EDIT_ORDERS,
+        userOrders: data
+      })
+    );
+};
+
+export const adminEditStatus = (status, orderId) => dispatch => {
+  let options = optionFetch("PUT", status, {
+    "content-type": "application/json",
+    K_access_token: localStorage.getItem("K_access_token")
+  });
+  return fetch(
+    `http://127.0.0.1:5000/api/v2/order/admin_status/${orderId}`,
+    options
+  )
+    .then(response => response.json())
+    .then(data =>
+      dispatch({
+        type: constants.ADMIN_EDIT_ORDERS,
+        userOrders: data
+      })
+    );
+};
