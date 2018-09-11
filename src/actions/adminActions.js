@@ -14,6 +14,7 @@ let optionFetch = (method, body = undefined, headers) => {
     };
   }
 };
+
 export const PostMeal = mealData => dispatch => {
   let options = optionFetch("POST", mealData, {
     "content-type": "application/json",
