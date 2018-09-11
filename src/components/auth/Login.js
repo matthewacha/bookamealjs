@@ -36,7 +36,7 @@ class Login extends React.Component {
       email: e.target.elements.email.value,
       password: e.target.elements.password.value,
       isadmin: e.target.elements.isadmin.checked
-    };
+	};
     if (String(credentials.isadmin) === "true") {
       this.props.loginAdmin(JSON.stringify(credentials));
     } else {

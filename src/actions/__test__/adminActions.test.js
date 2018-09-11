@@ -29,7 +29,7 @@ describe("tests authentication actions", () => {
   it("creates a meal", () => {
     const store = mockStore({});
     fetchMocker(
-      "http://127.0.0.1:5000/api/v2/meals/",
+      "https://bookamealbk.herokuapp.com/api/v2/meals/",
       { message: "Successfully created" },
       "post"
     );
@@ -47,7 +47,7 @@ describe("tests authentication actions", () => {
   it("edit a meal", () => {
     const store = mockStore({});
     fetchMocker(
-      `http://127.0.0.1:5000/api/v2/meals/1`,
+      `https://bookamealbk.herokuapp.com/api/v2/meals/1`,
       { message: "Successfully edited" },
       "put"
     );
@@ -65,7 +65,7 @@ describe("tests authentication actions", () => {
   it("delete a meal", () => {
     const store = mockStore({});
     fetchMocker(
-      `http://127.0.0.1:5000/api/v2/meals/1`,
+      `https://bookamealbk.herokuapp.com/api/v2/meals/1`,
       { message: "Successfully deleted" },
       "delete"
     );
@@ -83,7 +83,7 @@ describe("tests authentication actions", () => {
   it("delete a menu meal", () => {
     const store = mockStore({});
     fetchMocker(
-      "http://127.0.0.1:5000/api/v2/menus/King/1",
+      "https://bookamealbk.herokuapp.com/api/v2/menus/King/1",
       { message: "Successfully deleted" },
       "delete"
     );
@@ -101,7 +101,7 @@ describe("tests authentication actions", () => {
   it("get a menu meal", () => {
     const store = mockStore({});
     fetchMocker(
-      "http://127.0.0.1:5000/api/v2/meals/1",
+      "https://bookamealbk.herokuapp.com/api/v2/meals/1",
       { message: "Successfully returned" },
       "get"
     );
@@ -119,7 +119,7 @@ describe("tests authentication actions", () => {
   it("Add meal to menu", () => {
     const store = mockStore({});
     fetchMocker(
-      "http://127.0.0.1:5000/api/v2/menus/1",
+      "https://bookamealbk.herokuapp.com/api/v2/menus/1",
       { message: "Successfully added" },
       "post"
     );
@@ -137,7 +137,7 @@ describe("tests authentication actions", () => {
   it("get a menu", () => {
     const store = mockStore({});
     fetchMocker(
-      "http://127.0.0.1:5000/api/v2/getmenus/King",
+      "https://bookamealbk.herokuapp.com/api/v2/getmenus/King",
       { message: "Successfully added" },
       "get"
     );
@@ -155,7 +155,7 @@ describe("tests authentication actions", () => {
   it("get menus", () => {
     const store = mockStore({});
     fetchMocker(
-      "http://127.0.0.1:5000/api/v2/menus/",
+      "https://bookamealbk.herokuapp.com/api/v2/menus/",
       { message: "Successfully added" },
       "get"
     );
@@ -173,7 +173,7 @@ describe("tests authentication actions", () => {
   it("get meals", () => {
     const store = mockStore({});
     fetchMocker(
-      "http://127.0.0.1:5000/api/v2/meals/",
+      "https://bookamealbk.herokuapp.com/api/v2/meals/",
       { message: "Successfully returned" },
       "get"
     );
@@ -191,7 +191,7 @@ describe("tests authentication actions", () => {
   it("edit status works", () => {
     const store = mockStore({});
     fetchMocker(
-      "http://127.0.0.1:5000/api/v2/order/admin_status/1",
+      "https://bookamealbk.herokuapp.com/api/v2/order/admin_status/1",
       { message: "Successfully returned" },
       "put"
     );
@@ -209,7 +209,7 @@ describe("tests authentication actions", () => {
   it("user edit status works", () => {
     const store = mockStore({});
     fetchMocker(
-      "http://127.0.0.1:5000/api/v2/order/user_status/1",
+      "https://bookamealbk.herokuapp.com/api/v2/order/user_status/1",
       { message: "Successfully returned" },
       "put"
     );
@@ -227,7 +227,7 @@ describe("tests authentication actions", () => {
   it("admin get orders", () => {
     const store = mockStore({});
     fetchMocker(
-      "http://127.0.0.1:5000/api/v2/getorder/admin",
+      "https://bookamealbk.herokuapp.com/api/v2/getorder/admin",
       { message: "Successfully returned" },
       "get"
     );
@@ -245,7 +245,7 @@ describe("tests authentication actions", () => {
   it("user get orders", () => {
     const store = mockStore({});
     fetchMocker(
-      "http://127.0.0.1:5000/api/v2/orders",
+      "https://bookamealbk.herokuapp.com/api/v2/orders",
       { message: "Successfully returned" },
       "get"
     );
@@ -263,7 +263,7 @@ describe("tests authentication actions", () => {
   it("user posts orders", () => {
     const store = mockStore({});
     fetchMocker(
-      "http://127.0.0.1:5000/api/v2/orders/1/2",
+      "https://bookamealbk.herokuapp.com/api/v2/orders/1/2",
       { message: "Successfully returned" },
       "post"
     );
@@ -281,7 +281,7 @@ describe("tests authentication actions", () => {
   it("user gets caterers menu", () => {
     const store = mockStore({});
     fetchMocker(
-      "http://127.0.0.1:5000/api/v2/menus/1",
+      "https://bookamealbk.herokuapp.com/api/v2/menus/1",
       {
         message: "Successfully returned"
       },
@@ -301,7 +301,7 @@ describe("tests authentication actions", () => {
   it("user gets caterer", () => {
     const store = mockStore({});
     fetchMocker(
-      "http://127.0.0.1:5000/api/v2/caterer/Java",
+      "https://bookamealbk.herokuapp.com/api/v2/caterer/Java",
       {
         message: "Successfully returned"
       },

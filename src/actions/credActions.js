@@ -6,15 +6,16 @@ const signOptions = signData => {
     method: "POST",
     body: signData,
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     }
+    
   };
 };
 
 export const signUp = signData => dispatch => {
   if (signData) {
     const options = signOptions(signData);
-    return fetch(`http://127.0.0.1:5000/api/v2/auth/signup`, options)
+    return fetch(`https://bookamealbk.herokuapp.com/api/v2/auth/signup`, options)
       .then(result => result.json())
       .then(data =>
         dispatch({
@@ -28,7 +29,7 @@ export const signUp = signData => dispatch => {
 export const logIn = loginData => dispatch => {
   if (loginData) {
     const options = signOptions(loginData);
-    return fetch(`http://127.0.0.1:5000/api/v2/auth/login`, options)
+    return fetch(`https://bookamealbk.herokuapp.com/api/v2/auth/login`, options)
       .then(result => result.json())
       .then(data => {
         dispatch({
@@ -44,7 +45,7 @@ export const logIn = loginData => dispatch => {
 
 export const signAdmin = signData => dispatch => {
   let options = signOptions(signData);
-  return fetch(`http://127.0.0.1:5000/api/v2/auth/admins`, options)
+  return fetch(`https://bookamealbk.herokuapp.com/api/v2/auth/admins`, options)
     .then(response => response.json())
     .then(data =>
       dispatch({
@@ -56,7 +57,7 @@ export const signAdmin = signData => dispatch => {
 
 export const loginAdmin = loginData => dispatch => {
   let options = signOptions(loginData);
-  return fetch(`http://127.0.0.1:5000/api/v2/auth/adminLogin`, options)
+  return fetch(`https://bookamealbk.herokuapp.com/api/v2/auth/adminLogin`, options)
     .then(response => response.json())
     .then(data => {
       dispatch({
@@ -78,7 +79,7 @@ export const editAdminInfo = signData => dispatch => {
       K_access_token: localStorage.getItem("K_access_token")
     }
   };
-  return fetch(`http://127.0.0.1:5000/api/v2/auth/manageAdmin`, options)
+  return fetch(`https://bookamealbk.herokuapp.com/api/v2/auth/manageAdmin`, options)
     .then(response => response.json())
     .then(data =>
       dispatch({

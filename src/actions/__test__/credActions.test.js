@@ -54,7 +54,7 @@ describe("tests authentication actions", () => {
   });
   it("calls signup request if fetch was successful", () => {
     const store = mockStore({});
-    fetchMocker("http://127.0.0.1:5000/api/v2/auth/signup", {
+    fetchMocker("https://bookamealbk.herokuapp.com/api/v2/auth/signup", {
       message: "Successfully signed up"
     });
     const expectedActions = expecteds(
@@ -71,7 +71,7 @@ describe("tests authentication actions", () => {
 
   it("calls login request if fetch was successful", () => {
     const store = mockStore({});
-    fetchMocker("http://127.0.0.1:5000/api/v2/auth/login", {
+    fetchMocker("https://bookamealbk.herokuapp.com/api/v2/auth/login", {
       message: "Successfully logged in"
     });
     const expectedActions = expecteds(
@@ -89,7 +89,7 @@ describe("tests authentication actions", () => {
 
   it("calls signup admin request if fetch was successful", () => {
     const store = mockStore({});
-    fetchMocker("http://127.0.0.1:5000/api/v2/auth/admins", {
+    fetchMocker("https://bookamealbk.herokuapp.com/api/v2/auth/admins", {
       message: "Successfully signed up"
     });
     const expectedActions = expecteds(
@@ -106,7 +106,7 @@ describe("tests authentication actions", () => {
 
   it("calls login admin request if fetch was successful", () => {
     const store = mockStore({});
-    fetchMocker("http://127.0.0.1:5000/api/v2/auth/adminLogin", token);
+    fetchMocker("https://bookamealbk.herokuapp.com/api/v2/auth/adminLogin", token);
     const expectedActions = expecteds(
         "ADMIN_LOGIN",
         { token: "8726347kwejhbfv238fu" },
@@ -122,7 +122,7 @@ describe("tests authentication actions", () => {
   it("calls edit admin request if fetch was successful", () => {
     const store = mockStore({});
     fetchMocker(
-      "http://127.0.0.1:5000/api/v2/auth/manageAdmin",
+      "https://bookamealbk.herokuapp.com/api/v2/auth/manageAdmin",
       { message: "Edited" },
       "put"
     );

@@ -20,7 +20,7 @@ export const PostMeal = mealData => dispatch => {
     "content-type": "application/json",
     K_access_token: localStorage.getItem("K_access_token")
   });
-  return fetch(`http://127.0.0.1:5000/api/v2/meals/`, options)
+  return fetch(`https://bookamealbk.herokuapp.com/api/v2/meals/`, options)
     .then(response => response.json())
     .then(data =>
       dispatch({
@@ -35,7 +35,7 @@ export const EditMeal = (mealData, mealID) => dispatch => {
     "content-type": "application/json",
     K_access_token: localStorage.getItem("K_access_token")
   });
-  return fetch(`http://127.0.0.1:5000/api/v2/meals/${mealID}`, options)
+  return fetch(`https://bookamealbk.herokuapp.com/api/v2/meals/${mealID}`, options)
     .then(response => response.json())
     .then(data =>
       dispatch({
@@ -53,7 +53,7 @@ export const DeleteMeal = mealId => dispatch => {
         K_access_token: localStorage.getItem("K_access_token")
       }
     };
-    return fetch(`http://127.0.0.1:5000/api/v2/meals/${mealId}`, options)
+    return fetch(`https://bookamealbk.herokuapp.com/api/v2/meals/${mealId}`, options)
       .then(response => response.json())
       .then(data =>
         dispatch({
@@ -69,7 +69,7 @@ export const DeleteMenuMeal = (mealId, menuName) => dispatch => {
     K_access_token: localStorage.getItem("K_access_token")
   });
   return fetch(
-    `http://127.0.0.1:5000/api/v2/menus/${menuName}/${mealId}`,
+    `https://bookamealbk.herokuapp.com/api/v2/menus/${menuName}/${mealId}`,
     options
   )
     .then(response => response.json())
@@ -84,7 +84,7 @@ export const GetMeal = mealId => dispatch => {
   let options = optionFetch("GET", undefined, {
     K_access_token: localStorage.getItem("K_access_token")
   });
-  return fetch(`http://127.0.0.1:5000/api/v2/meals/${mealId}`, options)
+  return fetch(`https://bookamealbk.herokuapp.com/api/v2/meals/${mealId}`, options)
     .then(response => response.json())
     .then(data =>
       dispatch({
@@ -99,7 +99,7 @@ export const AddToMenu = (mealId, menuName) => dispatch => {
     "content-type": "application/json",
     K_access_token: localStorage.getItem("K_access_token")
   });
-  return fetch(`http://127.0.0.1:5000/api/v2/menus/${mealId}`, options)
+  return fetch(`https://bookamealbk.herokuapp.com/api/v2/menus/${mealId}`, options)
     .then(response => response.json())
     .then(data =>
       dispatch({
@@ -113,7 +113,7 @@ export const GetMenu = MenuName => dispatch => {
   let options = optionFetch("GET", undefined, {
     K_access_token: localStorage.getItem("K_access_token")
   });
-  return fetch(`http://127.0.0.1:5000/api/v2/getmenus/${MenuName}`, options)
+  return fetch(`https://bookamealbk.herokuapp.com/api/v2/getmenus/${MenuName}`, options)
     .then(response => response.json())
     .then(data =>
       dispatch({
@@ -126,7 +126,7 @@ export const GetMenus = () => dispatch => {
   let options = optionFetch("GET", undefined, {
     K_access_token: localStorage.getItem("K_access_token")
   });
-  return fetch(`http://127.0.0.1:5000/api/v2/menus/`, options)
+  return fetch(`https://bookamealbk.herokuapp.com/api/v2/menus/`, options)
     .then(response => response.json())
     .then(data =>
       dispatch({
@@ -139,7 +139,7 @@ export const GetMeals = () => dispatch => {
   let options = optionFetch("GET", undefined, {
     K_access_token: localStorage.getItem("K_access_token")
   });
-  return fetch(`http://127.0.0.1:5000/api/v2/meals/`, options)
+  return fetch(`https://bookamealbk.herokuapp.com/api/v2/meals/`, options)
     .then(response => response.json())
     .then(data =>
       dispatch({
@@ -153,7 +153,7 @@ export const getCaterer = catererName => dispatch => {
   let options = optionFetch("GET", undefined, {
     access_token: localStorage.getItem("access_token")
   });
-  return fetch(`http://127.0.0.1:5000/api/v2/caterer/${catererName}`, options)
+  return fetch(`https://bookamealbk.herokuapp.com/api/v2/caterer/${catererName}`, options)
     .then(response => response.json())
     .then(data =>
       dispatch({
@@ -167,7 +167,7 @@ export const getCatererMenu = catererId => dispatch => {
   let options = optionFetch("GET", undefined, {
     access_token: localStorage.getItem("access_token")
   });
-  return fetch(`http://127.0.0.1:5000/api/v2/menus/${catererId}`, options)
+  return fetch(`https://bookamealbk.herokuapp.com/api/v2/menus/${catererId}`, options)
     .then(response => response.json())
     .then(data =>
       dispatch({
@@ -183,7 +183,7 @@ export const makeOrder = (menuId, mealId) => dispatch => {
     access_token: localStorage.getItem("access_token")
   });
   return fetch(
-    `http://127.0.0.1:5000/api/v2/orders/${menuId}/${mealId}`,
+    `https://bookamealbk.herokuapp.com/api/v2/orders/${menuId}/${mealId}`,
     options
   )
     .then(response => response.json())
@@ -200,7 +200,7 @@ export const getOrders = () => dispatch => {
     "content-type": "application/json",
     access_token: localStorage.getItem("access_token")
   });
-  return fetch(`http://127.0.0.1:5000/api/v2/orders`, options)
+  return fetch(`https://bookamealbk.herokuapp.com/api/v2/orders`, options)
     .then(response => response.json())
     .then(data =>
       dispatch({
@@ -214,7 +214,7 @@ export const getAdminOrders = () => dispatch => {
   let options = optionFetch("GET", undefined, {
     K_access_token: localStorage.getItem("K_access_token")
   });
-  return fetch(`http://127.0.0.1:5000/api/v2/getorder/admin`, options)
+  return fetch(`https://bookamealbk.herokuapp.com/api/v2/getorder/admin`, options)
     .then(response => response.json())
     .then(data =>
       dispatch({
@@ -230,7 +230,7 @@ export const userEditStatus = (status, orderId) => dispatch => {
     access_token: localStorage.getItem("access_token")
   });
   return fetch(
-    `http://127.0.0.1:5000/api/v2/order/user_status/${orderId}`,
+    `https://bookamealbk.herokuapp.com/api/v2/order/user_status/${orderId}`,
     options
   )
     .then(response => response.json())
@@ -248,7 +248,7 @@ export const adminEditStatus = (status, orderId) => dispatch => {
     K_access_token: localStorage.getItem("K_access_token")
   });
   return fetch(
-    `http://127.0.0.1:5000/api/v2/order/admin_status/${orderId}`,
+    `https://bookamealbk.herokuapp.com/api/v2/order/admin_status/${orderId}`,
     options
   )
     .then(response => response.json())
