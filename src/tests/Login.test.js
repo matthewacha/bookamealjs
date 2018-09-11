@@ -62,7 +62,7 @@ describe('<Login/>', () => {
                                         <Login store = {bookMeal} loginAdmin={loginAdmin} login={login}/>
                                     </MemoryRouter>);
             loginwrapper.find('form.login').simulate('submit', handleSubmitEvent);
-            //expect(login).toMatchSnapshot();
+            expect(login).toMatchSnapshot();
             });
     
     }

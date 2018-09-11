@@ -1,6 +1,6 @@
 import { SIGN_USER, LOGIN_USER, ADMIN_SIGNUP, ADMIN_LOGIN } from "./types";
-import history from "../utils/history";
-import { notify } from "react-notify-toast";
+
+
 const signOptions = signData => {
   return {
     method: "POST",
@@ -10,6 +10,7 @@ const signOptions = signData => {
     }
   };
 };
+
 export const signUp = signData => dispatch => {
   if (signData) {
     const options = signOptions(signData);
@@ -26,7 +27,7 @@ export const signUp = signData => dispatch => {
 
 export const logIn = loginData => dispatch => {
   if (loginData) {
-    const options = signOptions(loginData)
+    const options = signOptions(loginData);
     return fetch(`http://127.0.0.1:5000/api/v2/auth/login`, options)
       .then(result => result.json())
       .then(data => {
@@ -42,7 +43,7 @@ export const logIn = loginData => dispatch => {
 };
 
 export const signAdmin = signData => dispatch => {
-  let options = signOptions(signData)
+  let options = signOptions(signData);
   return fetch(`http://127.0.0.1:5000/api/v2/auth/admins`, options)
     .then(response => response.json())
     .then(data =>
@@ -54,7 +55,7 @@ export const signAdmin = signData => dispatch => {
 };
 
 export const loginAdmin = loginData => dispatch => {
-  let options = signOptions(loginData)
+  let options = signOptions(loginData);
   return fetch(`http://127.0.0.1:5000/api/v2/auth/adminLogin`, options)
     .then(response => response.json())
     .then(data => {
