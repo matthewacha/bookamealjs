@@ -10,17 +10,17 @@ import {CatererView} from '../catererView';
 
 describe('<SearchCaterer/>', () => {
     beforeEach(function() {
-        global.mocklocalStorage = jest.genMockFunction();
+        global.mocklocalStorage = jest.fn();
         const mocklocalStorage={
-            getItem: jest.genMockFunction(),
-            setItem: jest.genMockFunction()
+            getItem: jest.fn(),
+            setItem: jest.fn()
         }
         global.localStorage = mocklocalStorage
 
         
       });
     it('loads succesfully',()=>{
-        var getCaterer= ()=> jest.genMockFunction()
+        var getCaterer= ()=> jest.fn()
         var caterer ={
             name: 'KFC',
             location:'Kla',

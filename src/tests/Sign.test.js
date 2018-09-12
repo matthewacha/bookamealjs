@@ -55,8 +55,8 @@ describe('<Signup/>', () => {
         
         window.fetch.returns(Promise.resolve(res));
         const handleSubmitEvent = { preventDefault: () => jest.fn() };
-        var signAdmin = ()=> jest.genMockFunction()
-        var signUp = ()=> jest.genMockFunction()
+        var signAdmin = ()=> jest.fn()
+        var signUp = ()=> jest.fn()
         let  signup = mount(<MemoryRouter initialEntries={['/']} initialIndex={0}>
                                     <Signup store = {bookMeal} signAdmin={signAdmin} signUp={signUp}/>
                                 </MemoryRouter>);
@@ -73,8 +73,8 @@ describe('<Signup/>', () => {
         //     });
         
         // window.fetch.returns(Promise.resolve(response));
-        var signAdmin = ()=> jest.genMockFunction()
-        var signUp = ()=> jest.genMockFunction()
+        var signAdmin = ()=> jest.fn()
+        var signUp = ()=> jest.fn()
         // spyOn(Signup.prototype, 'componentWillReceiveProps').and.callThrough()
         var admin={message:"Successfully signed up"};
 

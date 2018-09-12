@@ -11,13 +11,13 @@ import { AdminDropdown } from '../adminMenuDropdown';
 describe('<AdminDropdown/>', () => {
 
     it('loads succesfully',()=>{
-        global.mocklocalStorage = jest.genMockFunction();
+        global.mocklocalStorage = jest.fn();
         const mocklocalStorage={
-            getItem: jest.genMockFunction(),
-            setItem: jest.genMockFunction()
+            getItem: jest.fn(),
+            setItem: jest.fn()
         }
         global.localStorage = mocklocalStorage
-        var GetMenus= ()=> jest.genMockFunction()
+        var GetMenus= ()=> jest.fn()
         var MenusList ={Menus:['one', 'two']}
         const wrapper = mount(<MemoryRouter >
             <Provider  store = {bookMeal} >

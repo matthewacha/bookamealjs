@@ -9,7 +9,7 @@ import { MenuView } from "../MenuView";
 
 describe("<MenuView/>", () => {
   it("loads succesfully", () => {
-    var mockFunc = () => jest.genMockFunction();
+    var mockFunc = () => jest.fn();
     var menuList = {
       Menu: [
         {

@@ -9,7 +9,7 @@ import { MenuList } from "../adminMenus";
 
 describe("<MenuList/>", () => {
   const loadTest = MenusList => {
-    const mockFunc = () => jest.genMockFunction();
+    const mockFunc = () => jest.fn();
     const wrapper = mount(
       <MemoryRouter>
         <Provider store={bookMeal}>
@@ -26,6 +26,7 @@ describe("<MenuList/>", () => {
     );
 
     expect(wrapper.find(".panel-body").exists()).toBe(true);
+    return wrapper
   };
 
   it("loads succesfully", () => {
@@ -78,5 +79,24 @@ describe("<MenuList/>", () => {
       ]
     };
     loadTest(MenusList);
+  });
+
+  it("loads succesfully with null meal id", () => {
+    var MenusList = {
+      Menu: [
+        {
+          mealId: null,
+          mealName: null,
+          mealPrice: null
+        },
+        {
+          mealName: "beef",
+          mealPrice: 3400
+        }
+      ]
+    };
+    const fakeEvent = {preventDefault: jest.fn()}
+    const wrapper = loadTest(MenusList);
+    wrapper.find('form').simulate('submit', fakeEvent)
   });
 });

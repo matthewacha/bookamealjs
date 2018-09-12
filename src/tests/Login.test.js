@@ -56,8 +56,8 @@ describe('<Login/>', () => {
             
             window.fetch.returns(Promise.resolve(res));
             const handleSubmitEvent = { preventDefault: () => jest.fn() };
-            var loginAdmin = () => jest.genMockFunction()
-            var login = () => jest.genMockFunction()
+            var loginAdmin = () => jest.fn()
+            var login = () => jest.fn()
             let loginwrapper = mount(<MemoryRouter initialEntries={['/']} initialIndex={0}>
                                         <Login store = {bookMeal} loginAdmin={loginAdmin} login={login}/>
                                     </MemoryRouter>);

@@ -10,9 +10,9 @@ import {OrderList} from '../adminOrders';
 
 describe('<OrderList/>', () => {
     beforeEach(function() {
-        global.localStorage = jest.genMockFunction();
-        global.localStorage.setItem = jest.genMockFunction();
-        global.localStorage.getItem = jest.genMockFunction();
+        global.localStorage = jest.fn();
+        global.localStorage.setItem = jest.fn();
+        global.localStorage.getItem = jest.fn();
         // var spy1 = sinon.spy(window.localStorage, "setItem");
         // var stub1 = sinon.stub(window.localStorage, "getItem");
         // var JSONData = {
@@ -26,7 +26,7 @@ describe('<OrderList/>', () => {
         
       });
     it('loads succesfully with orders',()=>{
-        var getAdminOrders= ()=> jest.genMockFunction()
+        var getAdminOrders= ()=> jest.fn()
         var history = {push:jest.fn()}
         var adminOrders ={
             Orders:[{
@@ -51,7 +51,7 @@ describe('<OrderList/>', () => {
         var stub1 = sinon.stub(window.localStorage, "getItem");
         stub1.returns(null); 
         spy1.calledWith('access_token', null);
-        var getAdminOrders= ()=> jest.genMockFunction()
+        var getAdminOrders= ()=> jest.fn()
         var history = {push:jest.fn()}
         var adminOrders ={}
         // const handleOrderEvent = { preventDefault: () => console.log('preventDefault') };
@@ -63,13 +63,13 @@ describe('<OrderList/>', () => {
         context: {store: bookMeal},
         childContextTypes: {store: PropTypes.object.isRequired}
     });
-    // wrapper.instance().getCatererMenu = jest.genMockFunction();
+    // wrapper.instance().getCatererMenu = jest.fn();
 
     // wrapper.find('a').simulate('click', handleOrderEvent)
     expect(wrapper.find('div#undefined').text()).toBe('Awaiting orders from your clients..');
     })
     // it('loads succesfully',()=>{
-    //     var getOrders= ()=> jest.genMockFunction()
+    //     var getOrders= ()=> jest.fn()
     //     var userOrders ={}
     //     // const handleOrderEvent = { preventDefault: () => console.log('preventDefault') };
     //     const wrapper = mount(<MemoryRouter >
@@ -80,7 +80,7 @@ describe('<OrderList/>', () => {
     //     context: {store: bookMeal},
     //     childContextTypes: {store: PropTypes.object.isRequired}
     // });
-    // // wrapper.instance().getCatererMenu = jest.genMockFunction();
+    // // wrapper.instance().getCatererMenu = jest.fn();
 
     // // wrapper.find('a').simulate('click', handleOrderEvent)
     // expect(wrapper.find('.panel-body').exists()).toBe(true);

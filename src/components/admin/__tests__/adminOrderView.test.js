@@ -8,7 +8,7 @@ import bookMeal from "../../../utils/store";
 import { AdminOrderView } from "../OrderView";
 
 describe("<AdminOrderView/>", () => {
-  const mockFunc = () => jest.genMockFunction();
+  const mockFunc = () => jest.fn();
   const unrealEvent = { preventDefault: () => jest.fn() };
   const listElements = [
     'cancelled', 'ready', 'delivered', 

@@ -7,8 +7,8 @@ import {AddMealForm} from '../addMealForm';
 
 describe('<AddMealForm/>', () => {
     it('form loads successfully', () => {
-        var PostMeal= ()=> jest.genMockFunction()
-        var GetMeals= ()=> jest.genMockFunction()
+        var PostMeal= ()=> jest.fn();
+        var GetMeals= ()=> jest.fn();
         const editEvent = { preventDefault: () => jest.fn() };
         let  form= mount(<MemoryRouter initialEntries={['/']} initialIndex={0}>
                                   <AddMealForm store = {bookMeal} PostMeal={PostMeal} GetMeals={GetMeals}/>

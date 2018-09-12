@@ -8,7 +8,7 @@ import { MealList } from "../adminMeals";
 
 describe("<MealList/>", () => {
   const returnWrapper = meals => {
-    var mockFunc = () => jest.genMockFunction();
+    var mockFunc = () => jest.fn();
     return mount(
       <MemoryRouter>
         <Provider store={bookMeal}>

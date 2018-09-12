@@ -10,9 +10,9 @@ import {SearchCaterer} from '../searchCaterer';
 
 describe('<SearchCaterer/>', () => {
     beforeEach(function() {
-        global.sessionStorage = jest.genMockFunction();
-        global.sessionStorage.setItem = jest.genMockFunction();
-        global.sessionStorage.getItem = jest.genMockFunction();
+        global.sessionStorage = jest.fn();
+        global.sessionStorage.setItem = jest.fn();
+        global.sessionStorage.getItem = jest.fn();
         var spy1 = sinon.spy(window.sessionStorage, "setItem");
         var stub1 = sinon.stub(window.sessionStorage, "getItem");
         var JSONData = {
@@ -26,7 +26,7 @@ describe('<SearchCaterer/>', () => {
         
       });
     it('loads succesfully',()=>{
-        var getCaterer= ()=> jest.genMockFunction()
+        var getCaterer= ()=> jest.fn()
         const fakeEvent = { preventDefault: () => jest.fn() };
         // const spy = sinon.spy()
         const wrapper = mount(<MemoryRouter >
@@ -37,7 +37,7 @@ describe('<SearchCaterer/>', () => {
         context: {store: bookMeal},
         childContextTypes: {store: PropTypes.object.isRequired}
     });
-    // wrapper.instance().getCaterer = jest.genMockFunction();
+    // wrapper.instance().getCaterer = jest.fn();
 
     wrapper.find('.form-inline').simulate('submit',fakeEvent)
     expect(wrapper.find('form').length).toBe(1);

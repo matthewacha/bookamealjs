@@ -7,9 +7,9 @@ import {EditMealForm} from '../editMealForm';
 
 describe('<EditMealForm/>', () => {
     it('form loads successfully', () => {
-        var EditMeal= ()=> jest.genMockFunction()
-        var GetMeals= ()=> jest.genMockFunction()
-        var EditState = ()=> jest.genMockFunction()
+        var EditMeal= ()=> jest.fn()
+        var GetMeals= ()=> jest.fn()
+        var EditState = ()=> jest.fn()
         const editEvent = { preventDefault: () => jest.fn() };
          var EditMealState = {
             mealNameame: 'chicken',

@@ -9,7 +9,7 @@ import { UserOrderList } from "../userOrders";
 
 describe("<UserOrderList/>", () => {
   const returnWrapper = (element, orders) => {
-    const getOrders = () => jest.genMockFunction();
+    const getOrders = () => jest.fn();
     const wrapper = mount(
         <MemoryRouter>
           <Provider store={bookMeal}>

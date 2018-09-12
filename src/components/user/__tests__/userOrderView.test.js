@@ -7,7 +7,7 @@ import bookMeal from "../../../utils/store";
 import { UserOrderView } from "../userOrderView";
 
 describe("<UserOrderView/>", () => {
-  const mockFunc = () => jest.genMockFunction();
+  const mockFunc = () => jest.fn();
   const unrealEvent = { preventDefault: () => jest.fn() };
   const returnWrapper = (order)=>{
     return  mount(

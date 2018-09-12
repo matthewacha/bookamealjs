@@ -8,7 +8,7 @@ import bookMeal from "../../../utils/store";
 import { MealView } from "../mealsView";
 
 describe("<MealCaterer/>", () => {
-  const funcMock = () => jest.genMockFunction();
+  const funcMock = () => jest.fn();
   const handleMenuEvent = { preventDefault: () => jest.fn() };
   const simulator = (element, event, wrapper) => {
     wrapper.find(element).simulate(event, handleMenuEvent);

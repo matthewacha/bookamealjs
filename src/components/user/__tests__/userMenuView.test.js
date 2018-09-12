@@ -9,7 +9,7 @@ import { UserMenuView } from "../userMenuView";
 
 describe("<UserMenuCaterer/>", () => {
   it("loads succesfully", () => {
-    var mockFunc = () => jest.genMockFunction();
+    var mockFunc = () => jest.fn();
     var menuMeal = {
       mealNameame: "chicken",
       mealPrice: 3400

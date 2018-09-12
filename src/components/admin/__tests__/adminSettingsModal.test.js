@@ -10,10 +10,10 @@ import AdminSettingsModal from '../adminSettingsModal';
 describe('<AdminSettingsModal/>', () => {
 
     beforeEach(function() {
-        global.mocklocalStorage = jest.genMockFunction();
+        global.mocklocalStorage = jest.fn();
         const mocklocalStorage={
-            getItem: jest.genMockFunction(),
-            setItem: jest.genMockFunction()
+            getItem: jest.fn(),
+            setItem: jest.fn()
         }
         global.localStorage = mocklocalStorage})
     

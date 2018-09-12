@@ -10,13 +10,13 @@ import {MenuListView} from '../menuListView';
 
 describe('<MenuListView/>', () => {
     it('loads succesfully',()=>{
-        global.mocklocalStorage = jest.genMockFunction();
+        global.mocklocalStorage = jest.fn();
         const mocklocalStorage={
-            getItem: jest.genMockFunction(),
-            setItem: jest.genMockFunction()
+            getItem: jest.fn(),
+            setItem: jest.fn()
         }
         global.localStorage = mocklocalStorage
-        var funcMock= ()=> jest.genMockFunction()
+        var funcMock= ()=> jest.fn()
         const fakeEvent = { preventDefault: () => jest.fn() };
         const wrapper = mount(<MemoryRouter >
             <Provider  store = {bookMeal}>

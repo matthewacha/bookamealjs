@@ -2,10 +2,10 @@ import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
-global.mocklocalStorage = jest.genMockFunction();
+global.mocklocalStorage = jest.fn()
 const mocklocalStorage = {
-  getItem: jest.genMockFunction(),
-  setItem: jest.genMockFunction()
+  getItem: jest.fn(),
+  setItem: jest.fn()
 };
 global.localStorage = mocklocalStorage;
 global.sessionStorage = mocklocalStorage;
