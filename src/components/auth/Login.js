@@ -1,5 +1,5 @@
 import React from "react";
-import "../static/staticHome.css";
+import "../static/staticHome.scss";
 import { Checkbox } from "react-bootstrap";
 import { notify } from "react-notify-toast";
 import { PropTypes } from "prop-types";

@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 // import '../static/bootstrap/dist/css/bootstrap.css';
 import 'jquery/dist/jquery';
-import '../static/staticCustDash.css'
+import '../static/staticCustDash.scss'
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';

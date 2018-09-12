@@ -1,6 +1,6 @@
 import React from 'react';
 import 'jquery/dist/jquery';
-import '../static/staticCustDash.css'
+import '../static/staticCustDash.scss'
 import UserOrderList from './userOrders';
 import CatererMenu from './catererMenu';
 import Caterers from './userCaterers';
